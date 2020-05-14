@@ -1,0 +1,354 @@
+import dotenv from  'dotenv'
+import React, { Component } from 'react';
+import { Button, Card, CardBody, CardFooter,CardGroup, Col, Container, Form, Input, InputGroup, InputGroupAddon, InputGroupText, Row } from 'reactstrap';
+import { Link } from 'react-router-dom';
+import image from '../logo.png';
+import { ToastsContainer, ToastsStore } from 'react-toasts';
+import axios from 'axios';
+import JwtDecode from 'jwt-decode';
+import Switch from "react-switch";
+
+class RegisterM extends Component {
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      collapse: true,
+      fadeIn: true,
+      timeout: 300,
+      nom:"",
+      prenom:"",
+      address:"",
+      genre:"",
+      date_naissance:"",
+      email:"",
+      tel:"",
+      specialite:"",
+      password:"",
+      checked: false ,
+      assurance_maladie:"",
+      fix:"",
+      image:""
+      
+    };
+    this.handleChange = this.handleChange.bind(this);
+    dotenv.config()
+
+  }
+
+  handleChange(checked) {
+    this.setState({ checked });
+  }
+
+
+handleSubmit = () => {
+
+  axios.post("http://127.0.0.1:5000/medecin/addmedecin", {
+      nom:this.state.nom,
+      prenom:this.state.prenom,
+      genre:this.state.genre,
+      address:this.state.address,
+      email:this.state.email,
+      password:this.state.password,
+      tel:this.state.tel,
+      date_naissance:this.state.date_naissance,
+      specialite:this.state.specialite,
+      assurance_maladie:this.state.assurance_maladie,
+      fix:this.state.fix, 
+      image:this.state.image,
+
+  },
+
+
+)   .then(res=>{
+  console.log("data",res.data)
+  window.location.href="/#/loginmedecin"
+})
+}
+onchange= (event) => {
+  this.setState({email: event.target.value});
+  this.setState({password: event.target.value});
+  this.setState({nom: event.target.value});
+  this.setState({prenom: event.target.value});
+  this.setState({address: event.target.value});
+  this.setState({genre: event.target.value});
+  this.setState({tel: event.target.value});
+  this.setState({email: event.target.value});
+  this.setState({date_naissance: event.target.value});
+  this.setState({password: event.target.value});
+  this.setState({specialite: event.target.value});
+  this.setState({assurance_maladie : event.target.value});
+  this.setState({fix : event.target.value});
+  this.setState({image: event.target.value});
+  
+}
+
+  render() { 
+    return (  
+
+
+      <div>
+             <ToastsContainer store={ToastsStore} />
+
+             <header className="main_menu home_menu">
+        <div className="container">
+          <div className="row align-items-center">
+            <div className="col-lg-12">
+              <nav className="navbar navbar-expand-lg navbar-light">
+                <a className="navbar-brand" > <img src="img/logo.png" alt="logo" /> </a>
+                <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                  <span className="navbar-toggler-icon" />
+                </button>
+                <div className="collapse navbar-collapse main-menu-item justify-content-center" id="navbarSupportedContent">
+                  <ul className="navbar-nav align-items-center">
+                    <li className="nav-item active">
+                    <Link to="login" className="nav-link">Accueil</Link>
+                    </li>
+                    <li className="nav-item">
+                    <Link to="login" className="nav-link">A Propos</Link>
+                    </li>
+
+                  
+
+                    <li className="nav-item">
+                    <Link to="login" className="nav-link">Contact</Link>
+                    </li>
+                 
+
+ <li className="nav-item dropdown">
+ <span className="nav-link">Connexion</span> 
+<div className="dropdown-menu" aria-labelledby="navbarDropdown">
+<Link to="loginpatient" >
+              <a className="btn_2 d-none d-lg-block" href="#">Patient</a>
+              </Link>
+              <div>
+              <Link to="loginsecretaire" >
+              <a className="btn_2 d-none d-lg-block" href="#">Secretaire</a>
+              </Link> </div>
+              <Link to="loginmedecin" >
+              <a className="btn_2 d-none d-lg-block" href="#">Medecin</a>
+              </Link>
+ 
+</div>
+</li>
+
+                 
+                 
+                 
+                  </ul>
+
+  
+                </div>
+               
+              </nav>
+            </div>
+          </div>
+        </div>
+      </header>
+
+     
+ <section className="banner_partee">
+     </section>
+
+
+
+
+ {/* Sign up form */}
+ <section className="signup">
+          <div className="containere">
+            <div className="signup-content">
+              <div className="signup-form">
+                <h2 className="form-title">S'inscrire</h2>
+              
+                <Form method="" className="f" >
+
+                <InputGroup className="mb-3">
+                  <InputGroupAddon addonType="prepend">
+                  <InputGroupText>
+                    <i className="icon-user"></i>
+                  </InputGroupText>
+                </InputGroupAddon>
+                    <Input defaultValue={this.state.nom} required
+                      onChange={evenement=>this.setState({nom:evenement.target.value})} type="text" name="nom" id="nom" placeholder="nom" />
+                  </InputGroup>
+
+                  <InputGroup className="mb-3">
+                  <InputGroupAddon addonType="prepend">
+                  <InputGroupText>
+                    <i className="icon-user"></i>
+                  </InputGroupText>
+                </InputGroupAddon>
+                    <Input defaultValue={this.state.prenom} required
+                      onChange={evenement=>this.setState({prenom:evenement.target.value})} type="text" name="prenom" id="prenom" placeholder="prenom" />
+                  </InputGroup>
+
+                  <InputGroup className="mb-3">
+                  <InputGroupAddon addonType="prepend">
+                  <InputGroupText>
+                    <span>@</span>
+                  </InputGroupText>
+                </InputGroupAddon>
+                    <Input defaultValue={this.state.email} required
+                      onChange={evenement=>this.setState({email:evenement.target.value})} type="email" name="email" id="email" placeholder=" Email" />
+                  </InputGroup>
+
+                  <InputGroup className="mb-3">
+                  <InputGroupAddon addonType="prepend">
+                  <InputGroupText>
+                  <i className="icon-lock"></i>
+                  </InputGroupText>
+                </InputGroupAddon>
+                    <Input defaultValue={this.state.password} required
+                      onChange={evenement=>this.setState({password:evenement.target.value})} type="password" name="pass" id="pass" placeholder="mot de passe" />
+                </InputGroup>
+
+                <InputGroup className="mb-3">
+                  <InputGroupAddon addonType="prepend">
+                  <InputGroupText>
+                  <i className="icon-lock"></i>
+                  </InputGroupText>
+                </InputGroupAddon>
+                    <Input defaultValue={this.state.password} required
+                      onChange={evenement=>this.setState({password:evenement.target.value})} type="password" name="re_pass" id="re_pass" placeholder="Confirmer mot de passe" />
+                  </InputGroup>
+  
+                  <InputGroup className="mb-3">
+                  <InputGroupAddon addonType="prepend">
+                  <InputGroupText>
+                  <span>+216</span>
+                  </InputGroupText>
+                </InputGroupAddon>
+                    <Input defaultValue={this.state.tel} required
+                      onChange={evenement=>this.setState({tel:evenement.target.value})} type="Number" name="re_pass" id="re_pass" placeholder="Téléphone" />
+                  </InputGroup>
+
+                  <InputGroup className="mb-3">
+                  <InputGroupAddon addonType="prepend">
+                  <InputGroupText>
+                   <span>+216</span> 
+                  </InputGroupText>
+                </InputGroupAddon>
+                    <Input defaultValue={this.state.fix} required
+                      onChange={evenement=>this.setState({fix:evenement.target.value})} type="Number" name="re_pass" id="re_pass" placeholder="Téléphone fixe" />
+                  </InputGroup>
+
+                  <InputGroup className="mb-3">
+                  <InputGroupAddon addonType="prepend">
+                  <InputGroupText>
+                  <i className="icon-location-pin"></i>
+                  </InputGroupText>
+                </InputGroupAddon>
+                    <Input   defaultValue={this.state.address} required
+                      onChange={evenement=>this.setState({address:evenement.target.value})} type="text" name="re_pass" id="re_pass" placeholder="adresse" />
+                  </InputGroup>
+                 
+                  <InputGroup className="mb-3">
+                  <InputGroupAddon addonType="prepend">
+                  <InputGroupText>
+                  <i className="icon-calendar"></i>
+                  </InputGroupText>
+                </InputGroupAddon>
+                    <Input defaultValue={this.state.date_naissance} required
+                      onChange={evenement=>this.setState({date_naissance:evenement.target.value})} type="Date" name="re_pass" id="re_pass" placeholder="date" />
+                 </InputGroup>
+                
+
+                 <InputGroup className="mb-3">
+                  <InputGroupAddon addonType="prepend">
+                  <InputGroupText>
+                    <i className="fa fa-venus-mars"></i> 
+                  </InputGroupText>
+                </InputGroupAddon>
+                  <select className="select-css" name="select" id="select" required placeholder="Genre"  defaultValue={this.state.genre}
+                    onChange={evenement=>this.setState({genre:evenement.target.value})}>
+                    <option value={"0"}> Choisir votre genre </option>
+                            <option value="Femme"> Femme</option>
+                             <option value="Homme">  Homme </option>        
+                   </select>
+                  </InputGroup>
+
+                 
+                  <InputGroup className="mb-3">
+                  <InputGroupAddon addonType="prepend">
+                  <InputGroupText>
+                    <i className="icon-user"></i>
+                  </InputGroupText>
+                </InputGroupAddon>
+                  <select className="select-css" name="select" id="select" required placeholder="Genre"  defaultValue={this.state.specialite}
+                    onChange={evenement=>this.setState({specialite:evenement.target.value})}>
+                    <option value={"0"}>  votre specialite </option>
+                            <option value="genecologue"> genecologue</option>
+                             <option value="dentiste">  dentiste </option>        
+                   </select>
+                  </InputGroup>
+          
+
+            
+  
+                  <InputGroup className="mb-3">
+                  <InputGroupAddon addonType="prepend">
+                  <InputGroupText>
+                    <i className="icon-picture"></i>
+                  </InputGroupText>
+                </InputGroupAddon>
+                  <Input  type="file" placeholder="image"  defaultValue={this.state.image}
+                    onChange={evenement=>this.setState({image:evenement.target.value})}>
+                         
+                   </Input>
+                  </InputGroup>
+                  
+                  {/* <InputGroup className="mb-3">
+                  <InputGroupAddon addonType="prepend">
+                  <InputGroupText>
+                    <i className="icon-user"></i>
+                  </InputGroupText>
+                </InputGroupAddon>
+                  <Input  type="file" placeholder="image"  defaultValue={this.state.image}
+                    onChange={evenement=>this.setState({image:evenement.target.value})}>
+                         
+                   </Input>
+                  </InputGroup> */}
+
+                 <div className="form-group">
+                    <Input type="checkbox" name="agree-term" id="agree-term" className="agree-term"  required/>
+                    <label htmlFor="agree-term" className="label-agree-term"><span><span /></span>I agree all statements in  <a href="#" className="term-service">Terms of service</a></label>
+                  </div>
+
+
+
+                  <Col xs="6">
+                  <Button color="info" className="xl px-5 " onClick={this.handleSubmit}  >
+               S'inscrir</Button>
+                </Col>
+
+                
+
+                </Form>
+              
+              </div>
+              <div className="signup-image">
+                <figure><img src="images/signup-imagem.jpg" alt="sing up image" /></figure>
+                <Link to="loginmedecin" className="signup-image-link">Je suis déjà membre</Link>
+              </div>
+            </div>
+          </div>
+        </section>
+       
+
+
+
+
+
+
+
+
+            
+
+
+      </div>
+    );
+  }
+}
+ 
+export default RegisterM;

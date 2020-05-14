@@ -1,0 +1,6 @@
+{
+  "name": "LoginS",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./LoginS.js"
+}
