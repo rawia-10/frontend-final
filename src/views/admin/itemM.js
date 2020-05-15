@@ -41,8 +41,9 @@ class Itemmedecin extends Component {
 
             <tr>
                 <td >{item.nom} {item.prenom}</td>
-                <td >{item.address}</td>
+                
                  <td >{item.specialite}</td> 
+                 <td >{item.address}</td>
                 
               
                 <td >

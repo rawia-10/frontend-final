@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif:ital@1&display=swap');
 @extend display-flex;
 display-flex, .display-flex, .display-flex-center, .signup-content, .signin-content, .social-login, .socials {
 
@@ -458,7 +459,10 @@ h2 {
   .signin-content {
     padding-top: 67px;
     padding-bottom: 87px; }
-  
+  .imageee{
+    padding-top:20px;
+    padding-bottom: 20px;
+  }
   .social-login {
     align-items: center;
     -moz-align-items: center;
@@ -3135,9 +3139,9 @@ ul {
 /* line 61, ../../01 cl html template/03_jun 2019/182_medico_html/sass/_menu.scss */
 .main_menu .main-menu-item ul li .nav-link {
   color: #000000;
-  font-size: 20px;
+  font-size: 24px;
   padding: 38px 23px;
-  font-family: "Playfair Display", serif;
+  font-family: "Noto Serif ", serif;
   line-height: 13px;
   text-transform: capitalize;
 }
@@ -3178,9 +3182,9 @@ ul {
 
 /* line 101, ../../01 cl html template/03_jun 2019/182_medico_html/sass/_menu.scss */
 .dropdown .dropdown-menu .dropdown-item {
-  font-size: 14px;
+  font-size: 18px;
   padding: 9px 18px !important;
-  color: #000 !important;
+  color: #0065e1 !important;
   text-transform: capitalize;
 }
 
@@ -4427,14 +4431,21 @@ ul {
 
 /* line 110, ../../01 cl html template/03_jun 2019/182_medico_html/sass/_regervation_part.scss */
 .regervation_part .btn_2 {
-  margin-top: 10px;
-  background-color: #fff !important;
+  margin-top: 12px;
+  background-color: #00708a !important;
   font-family: "Playfair Display", serif;
   font-weight: 500;
   color: #242429;
   font-size: 14px;
 }
-
+/* .btn_3 {
+  margin-top: 12px;
+  background-color: #00708a !important;
+  font-family: "Playfair Display", serif;
+  font-weight: 500;
+  color: #242429;
+  font-size: 14px;
+} */
 /* line 118, ../../01 cl html template/03_jun 2019/182_medico_html/sass/_regervation_part.scss */
 .regervation_part .btn_2:hover {
   color: #fff !important;
@@ -4781,6 +4792,7 @@ ul {
 /* line 2, ../../01 cl html template/03_jun 2019/182_medico_html/sass/_footer.scss */
 .footer-area {
   background-color: #f3f6f7;
+  background-image: ;
 }
 
 @media (max-width: 991px) {
@@ -6855,6 +6867,7 @@ h1, h2, h3, h4, h5, h6 {
 /* line 2, ../../01 cl html template/03_jun 2019/182_medico_html/sass/_footer.scss */
 .footer-area {
   background-color: #f3f6f7;
+  
 }
 
 @media (max-width: 991px) {
@@ -7070,3 +7083,5 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /*# sourceMappingURL=style.css.map */
+
+

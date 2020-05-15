@@ -26,28 +26,28 @@ class ItemPatient extends Component {
         this.setState((prevState) => { return { fadeIn: !prevState } });
     }
 
-    deletepatient = () => {
-      const { item } = this.props
-      axios.delete(`http://127.0.0.1:8000/patient/delete/${item.Id}`)
-          .then(() => this.props.deletePatientReducer(item.Id))
-          .catch((err) => alert(err))
-  }
+//     deletepatient = () => {
+//       const { item } = this.props
+//       axios.delete(`http://127.0.0.1:5000/patient/delete/${item.Id}`)
+//           .then(() => this.props.deletePatientReducer(item.Id))
+//           .catch((err) => alert(err))
+//   }
+  handleClickDelete(e,id){
+    e.preventDefault();
+    console.log("id",id);
+    this.remove(id);
+             }
 
-    // deleteadmin = () => {
-    //     let token = localStorage.getItem("token");
-    //     if (!token) {
-    //         token = "";
-    //     }
-    //     const { item } = this.props
-    //     axios.delete(`http://127.0.0.1:5001/admin/${item.id}`,
-    //     {
-    //         headers: {
-    //             Authorization: 'Bearer ' + token
-    //         }})
-    //         .then(() => this.props.deleteAdminReducer(item.id))
-    //         .catch((err) => alert(err))
-    // }
-
+             remove(id)
+    {
+      fetch("http://localhost:5000/patient/delete/"+id,{method:"DELETE"})
+      .then(response=>response.json())
+      .then(data=>{
+          console.log("remove",data) ;
+          //this.getall();
+    }  )
+    }
+  
 
     render() {
         const { item } = this.props
@@ -55,21 +55,21 @@ class ItemPatient extends Component {
 
             <tr>
                 <td >{item.nom} {item.prenom}</td>
-                <td >{item.email}</td>
+                {/* <td >{item.email}</td>
                 <td >{item.address}</td>
                 <td >{item.tel}</td>
                 <td>{item.genre} </td>
-          <td>{item.date_naissance}</td>
+          <td>{item.date_naissance}</td> */}
                 <td >
-                    <div className="row ">
-                     <Link to={`/secretaire/info/${item.Id}`}>
+                    <div className="row "> 
+                     <Link to={`/secretaire/info/${item._id}`}>
                         <div name="col-xs-4 col-md-3 d-flex justify-content-end">
                             <i className="fa fa-info-circle t-green fa-lg" onClick={this.getPatient}></i>
                         </div>
                         </Link>
 
                         <div className="col-xs-4 col-md-3 d-flex justify-content-center">
-                            <i className="fa fa-trash t-red fa-lg" onClick={this.deletepatient} ></i>
+                            <i className="fa fa-trash t-red fa-lg" onClick={this.handleClickDelete} ></i>
                         </div>
                         
                         <Link to={`/secretaire/update/${item.Id}`}>

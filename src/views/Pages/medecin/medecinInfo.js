@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 
 
 
-class MedecinInfobyS extends Component {
+class Medecininfo extends Component {
     constructor(props) {
         super(props);
 
@@ -29,33 +29,18 @@ class MedecinInfobyS extends Component {
         };
     }
 
-    getMedecin = () => {
-
-      axios.get(`http://127.0.0.1:8000/medecin/get/${this.props.match.params.id}`,
-          {
-              headers: {
-                  Authorization: 'Bearer ' + localStorage.getItem("token")
-              }
-          })
-
-          .then((u) => {
-              this.setState({
-                nom: u.data.data.data.nom,
-                prenom: u.data.data.data.prenom,
-                address: u.data.data.data.address,
-                  email: u.data.data.data.email,
-                  specialite:u.data.data.data.specialite,
-
-                  tel: u.data.data.data.tel,
-                  genre: u.data.data.data.genre,
-                  date_naissance: u.data.data.data.date_naissance,
-              
-                  CreatedAt: u.data.data.data.CreatedAt,
-                  UpdatedAt: u.data.data.data.UpdatedAt
-              });
-          })
-          .catch((err) => alert(err))
-  }
+    getMedecin(){
+        fetch(`http://localhost:5000/medecin/getbyid/${this.props.match.params.id}`,
+        {method:"GET"})
+          .then(response => response.json()) 
+          .then(data => {
+            console.log("GETONE", data);
+       
+            
+            this.setState(data)           
+        })
+      }
+    
 
   componentDidMount = () => {
       this.getMedecin();
@@ -146,4 +131,4 @@ class MedecinInfobyS extends Component {
         );
     }
 }
-export default MedecinInfobyS;
+export default Medecininfo;

@@ -9,9 +9,11 @@ import RegisterM from './RegisterM';
 import RegisterP from './RegisterP';
 import Patient from './Patient'
 import Medecin from './medecin';
-import Info from './Patient'
+import Medecininfo from './medecin';
+import Info from './Patient';
+
 
 
 export {
-  Login, Page404, LoginAdmin, Register,LoginS,LoginM,LoginP,RegisterM,RegisterP,Patient,Medecin,Info
+  Login, Page404, LoginAdmin, Register,LoginS,LoginM,LoginP,RegisterM,RegisterP,Patient,Medecin,Info,Medecininfo
 };

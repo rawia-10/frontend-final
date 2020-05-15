@@ -108,24 +108,26 @@ onchange= (event) => {
                     </li>
                  
 
- <li className="nav-item dropdown">
- <span className="nav-link">Connexion</span> 
-<div className="dropdown-menu" aria-labelledby="navbarDropdown">
-<Link to="loginpatient" >
-              <a className="btn_2 d-none d-lg-block" href="#">Patient</a>
-              </Link>
-              <div>
-              <Link to="loginsecretaire" >
-              <a className="btn_2 d-none d-lg-block" href="#">Secretaire</a>
-              </Link> </div>
-              <Link to="loginmedecin" >
-              <a className="btn_2 d-none d-lg-block" href="#">Medecin</a>
-              </Link>
- 
-</div>
-</li>
+               
+                    <li className="nav-item dropdown">
+  <a className="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+   Connexion
+  </a>
+  <div className="dropdown-menu" aria-labelledby="navbarDropdown">
+    
+  <Link to="loginpatient" >
+  <a className="dropdown-item" >Patient</a>
+  </Link>
+  <Link to="loginsecretaire" >
+    <a className="dropdown-item">Secretaire</a>
+  </Link> 
+  <Link to="loginmedecin" >
+  <a className="dropdown-item">Medecin</a>
+ </Link>
 
-                 
+  </div>
+</li>
+              
                  
                  
                   </ul>
@@ -138,6 +140,8 @@ onchange= (event) => {
           </div>
         </div>
       </header>
+      <section className="banner_partee">
+     </section>
 
      
 
@@ -278,114 +282,62 @@ onchange= (event) => {
 
 
 
+        <section >
+     </section>
 
 
 
 
 
 
-
-<footer className="footer">
-  <div className="parallax_background parallax-window k" data-parallax="scroll" data-speed="0.8" />
-  <div className="footer_content">
+        <footer className="footer-area">
+  <div className="footer section_padding">
     <div className="container">
-      <div className="row">
-        <div className="col-lg-3 footer_col">
-          <div className="footer_about">
-            <div className="logo">
-              <a href="#">Medium<span /></a>
-            </div>
-            <div className="footer_about_text">Lorem ipsum dolor sit amet, lorem maximus consectetur adipiscing elit. Donec malesuada lorem maximus mauris.</div>
-            <div className="footer_social">
-              <ul className="d-flex flex-row align-items-center justify-content-start">
-                <li><a href="#"><i className="fa fa-pinterest" aria-hidden="true" /></a></li>
-                <li><a href="#"><i className="fa fa-facebook" aria-hidden="true" /></a></li>
-                <li><a href="#"><i className="fa fa-twitter" aria-hidden="true" /></a></li>
-                <li><a href="#"><i className="fa fa-dribbble" aria-hidden="true" /></a></li>
-                <li><a href="#"><i className="fa fa-behance" aria-hidden="true" /></a></li>
-                <li><a href="#"><i className="fa fa-linkedin" aria-hidden="true" /></a></li>
-              </ul>
-            </div>
-            <div className="copyright">
-              Copyright © All rights reserved | This template is made with
-              <i className="fa fa-heart-o" aria-hidden="true" /> by
-              <a href="https://colorlib.com" target="_blank">Rawia Agili</a>
-            </div>
-          </div>
+      <div className="row justify-content-between">
+        <div className="col-xl-2 col-md-4 col-sm-6 single-footer-widget">
+          <a href="#" className="footer_logo"> <img src="img/logo.png" alt="#" className="imgf"/> </a>
         </div>
-        <div className="col-lg-5 footer_col">
-          <div className="footer_contact">
-            <div className="footer_contact_title">Quick Contact</div>
-            <div className="footer_contact_form_container">
-              <form action="#" className="footer_contact_form" id="footer_contact_form">
-                <div className="d-flex flex-xl-row flex-column align-items-center justify-content-between">
-                  <Input type="text" className="footer_contact_Input" placeholder="Name" required="required" />
-                  <Input type="email" className="footer_contact_Input" placeholder="E-mail" required="required" />
+        <div className="col-xl-2 col-sm-6 col-md-4 single-footer-widget">
+          <h4>Liens rapides</h4>
+          <ul>
+            <li><a href="#">Accueil</a></li>
+            <li><a href="#">A propos</a></li>
+
+            <li><a href="#">Connexion</a></li>
+          
+          </ul>
+        </div>
+        <div className="col-xl-6 col-sm-6 col-md-6 single-footer-widget">
+        <div className="regervation_part_iner">
+        <form>
+                  <h2>Envoyer Email</h2>
+                  <div className="form-row">
+                    <div className="form-group col-md-6">
+                      <input type="email" className="form-control" id="inputEmail4" placeholder="Nom" />
+                    </div>
+                    <div className="form-group col-md-6">
+                      <input type="password" className="form-control" id="inputPassword4" placeholder="Email " />
+                    </div>
+                    
+                
+                    <div className="form-group col-md-12">
+                      <textarea className="form-control" id="Textarea" rows={4} placeholder="Message " defaultValue={""} />
+                    </div>
+                  </div>
+                  <div className="regerv_btn">
+                    <a href="#" className="btn_2">Envoyer</a>
+                  </div>
+                </form>
                 </div>
-                <textarea className="footer_contact_input footer_contact_textarea" placeholder="Message" required="required" defaultValue={""} />
-                <button className="footer_contact_button">send message</button>
-              </form>
-            </div>
-          </div>
+              
         </div>
-
-        <div className="col-lg-4 footer_col">
-          <div className="footer_hours">
-            <div className="footer_hours_title">Opening Hours</div>
-            <ul className="hours_list">
-              <li className="d-flex flex-row align-items-center justify-content-start">
-                <div>Monday – Thursday</div>
-                <div className="ml-auto">8.00 – 19.00</div>
-              </li>
-              <li className="d-flex flex-row align-items-center justify-content-start">
-                <div>Friday</div>
-                <div className="ml-auto">8.00 - 18.30</div>
-              </li>
-              <li className="d-flex flex-row align-items-center justify-content-start">
-                <div>Saturday</div>
-                <div className="ml-auto">9.30 – 17.00</div>
-              </li>
-              <li className="d-flex flex-row align-items-center justify-content-start">
-                <div>Sunday</div>
-                <div className="ml-auto">9.30 – 15.00</div>
-              </li>
-            </ul>
-          </div>
-        </div>
+        
       </div>
     </div>
   </div>
-  <div className="footer_bar">
-    <div className="container">
-      <div className="row">
-        <div className="col">
-          <div className="footer_bar_content d-flex flex-sm-row flex-column align-items-lg-center align-items-start justify-content-start">
-            <nav className="footer_nav">
-              <ul className="d-flex flex-lg-row flex-column align-items-lg-center align-items-start justify-content-start">
-                <li className="active"><a href="index.html">Home</a></li>
-                <li><a href="about.html">About Us</a></li>
-                <li><a href="services.html">Services</a></li>
-                <li><a href="news.html">News</a></li>
-                <li><a href="contact.html">Contact</a></li>
-              </ul>
-            </nav>
-            <div className="footer_links">
-              <ul className="d-flex flex-lg-row flex-column align-items-lg-center align-items-start justify-content-start">
-                <li><a href="#">Help Desk</a></li>
-                <li><a href="#">Emergency Services</a></li>
-                <li><a href="#">Appointment</a></li>
-              </ul>
-            </div>
-            <div className="footer_phone ml-lg-auto">
-              <i className="fa fa-phone" aria-hidden="true" />
-              <span>+34 586 778 8892</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+  
 </footer>
+
 
 
       </div>

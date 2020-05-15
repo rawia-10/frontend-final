@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import SearchField from 'react-search-field';
 import { Badge, Card,Form, CardBody,Button, CardHeader, Col, Pagination, PaginationItem, PaginationLink, Row, Table } 
 from 'reactstrap';
+import { Link } from 'react-router-dom';
 let prev  = 0;
 let next  = 0;
 let last  = 0;
@@ -149,15 +150,14 @@ remove(id)
         <button class="menu_search_button"><i class="fa fa-search" aria-hidden="true"></i></button>
 </form>
 
-                <Table responsive striped>
+                <Table hover bordered striped responsive size="xl">
                   <thead>
                   <tr>
-                  <th>nom</th>
-                    <th>prenom</th>
+                  <th>nom & prenom</th>
                     <th>date</th>
                     <th>heure</th>
                     <th>email</th>
-                    <th>tel</th>
+                    <th>Téléphone</th>
                     <th>Action</th>
                   </tr>
                   </thead>
@@ -166,8 +166,7 @@ remove(id)
                    currentTodos.filter(item =>item.date.toUpperCase().includes(this.state.keyword.toUpperCase().trim())).map((item,index)=>{
                    return(
                    <tr key={index}>
-                       <td>{item.nom}</td>
-                   <td>{item.prenom}</td>
+                       <td>{item.nom} {item.prenom}</td>
                    <td>{item.date}</td>
                    <td>{item.heure}</td>
                    <td>{item.email}</td>
@@ -176,10 +175,10 @@ remove(id)
                    <td>
                   {/* // <div className="App"> */}
        
-                
+                  <Link to="/secretaire/sendmail">
                     <button type="button" name="" id="" className="btn btn-success font-weight-bold "  >
                     <i className="fa fa-send pr-2"></i> Accept</button>
-                  
+                    </Link>
 
                     <button type="button" name="" id="" className="btn btn-dangerr font-weight-bold  ">
                     <i className="fa fa-refresh pr-2"></i> Refuse</button>

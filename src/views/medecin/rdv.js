@@ -160,7 +160,7 @@ remove(id)
                     <th>heure</th>
                     <th>email</th>
                     <th>tel</th>
-                    <th>Action</th>
+                    {/* <th>Action</th> */}
                   </tr>
                   </thead>
                   <tbody>{
@@ -174,13 +174,14 @@ remove(id)
                    <td>{item.heure}</td>
                    <td>{item.email}</td>
                    <td>{item.tel}</td>
-                  
+{/*                   
                    <td>
-                  {/* // <div className="App"> */}
+                
        
                    <i class='fa fa-edit fa-lg mt-4'     onClick={evt=>this.handleClickEdit(evt,item._id)}  style={{color:"green"}} ></i>
                    <i class='fa fa-trash fa-lg mt-4'   onClick={evt=>this.handleClickDelete(evt,item._id)} style={{color:"red"}}> </i>
-                   </td>
+                   
+                   </td> */}
                    
                    </tr>
                    );

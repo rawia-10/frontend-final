@@ -115,22 +115,24 @@ onchange= (event) => {
                     <Link to="login" className="nav-link">Contact</Link>
                     </li>
                  
+               
+                    <li className="nav-item dropdown">
+  <a className="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+   Connexion
+  </a>
+  <div className="dropdown-menu" aria-labelledby="navbarDropdown">
+    
+  <Link to="loginpatient" >
+  <a className="dropdown-item" >Patient</a>
+  </Link>
+  <Link to="loginsecretaire" >
+    <a className="dropdown-item">Secretaire</a>
+  </Link> 
+  <Link to="loginmedecin" >
+  <a className="dropdown-item">Medecin</a>
+ </Link>
 
- <li className="nav-item dropdown">
- <span className="nav-link">Connexion</span> 
-<div className="dropdown-menu" aria-labelledby="navbarDropdown">
-<Link to="loginpatient" >
-              <a className="btn_2 d-none d-lg-block" href="#">Patient</a>
-              </Link>
-              <div>
-              <Link to="loginsecretaire" >
-              <a className="btn_2 d-none d-lg-block" href="#">Secretaire</a>
-              </Link> </div>
-              <Link to="loginmedecin" >
-              <a className="btn_2 d-none d-lg-block" href="#">Medecin</a>
-              </Link>
- 
-</div>
+  </div>
 </li>
 
                  
@@ -336,10 +338,60 @@ onchange= (event) => {
         </section>
        
 
+        <section >
+     </section>
 
 
 
 
+
+        <footer className="footer-area">
+  <div className="footer section_padding">
+    <div className="container">
+      <div className="row justify-content-between">
+        <div className="col-xl-2 col-md-4 col-sm-6 single-footer-widget">
+          <a href="#" className="footer_logo"> <img src="img/logo.png" alt="#" className="imgf"/> </a>
+        </div>
+        <div className="col-xl-2 col-sm-6 col-md-4 single-footer-widget">
+          <h4>Liens rapides</h4>
+          <ul>
+            <li><a href="#">Accueil</a></li>
+            <li><a href="#">A propos</a></li>
+
+            <li><a href="#">Connexion</a></li>
+          
+          </ul>
+        </div>
+        <div className="col-xl-6 col-sm-6 col-md-6 single-footer-widget">
+        <div className="regervation_part_iner">
+        <form>
+                  <h2>Envoyer Email</h2>
+                  <div className="form-row">
+                    <div className="form-group col-md-6">
+                      <input type="email" className="form-control" id="inputEmail4" placeholder="Nom" />
+                    </div>
+                    <div className="form-group col-md-6">
+                      <input type="password" className="form-control" id="inputPassword4" placeholder="Email " />
+                    </div>
+                    
+                
+                    <div className="form-group col-md-12">
+                      <textarea className="form-control" id="Textarea" rows={4} placeholder="Message " defaultValue={""} />
+                    </div>
+                  </div>
+                  <div className="regerv_btn">
+                    <a href="#" className="btn_2">Envoyer</a>
+                  </div>
+                </form>
+                </div>
+              
+        </div>
+        
+      </div>
+    </div>
+  </div>
+  
+</footer>
 
 
 

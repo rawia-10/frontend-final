@@ -28,7 +28,7 @@ class Itemsecretaire extends Component {
    
     deletesecretaire= () => {
         const { item } = this.props
-        axios.delete(`http://127.0.0.1:8000/secretaire/delete/${item.Id}`)
+        axios.delete(`http://127.0.0.1:5000/secretaire/delete/${item.Id}`)
             .then(() => this.props.deletesecretaireReducer(item.Id))
             .catch((err) => alert(err))
     }
@@ -40,7 +40,7 @@ class Itemsecretaire extends Component {
 
             <tr>
                 <td >{item.nom} {item.prenom}</td>
-                <td >{item.address}</td>
+                 <td >{item.tel}</td>  
                 
               
                 <td >
@@ -57,11 +57,12 @@ class Itemsecretaire extends Component {
                      </div>
                      </Link>
 
+                  <Link to="">  
                         <div name="col-xs-4 col-md-3 d-flex justify-content-start">
                     <button type="button" name="" id="" className="btn btn-success font-weight-bold "  >
                     <i className="fa fa-send pr-2"></i> Accept</button>
                      </div>
-
+                     </Link>
                     <div className="col-xs-4 col-md-3 d-flex  justify-content-start">
 
                     <button type="button" name="" id="" className="btn btn-dangerr font-weight-bold  ">

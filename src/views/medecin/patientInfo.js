@@ -16,6 +16,7 @@ class PatientInfobyS extends Component {
             collapse: true,
             fadeIn: true,
             timeout: 300,
+            patient:[],
             Id: this.props.match.params.Id,
             nom:"",
             prenom:"",
@@ -24,6 +25,7 @@ class PatientInfobyS extends Component {
             date_naissance:"",
             email:"",
             tel:"",
+            
             remarque:"",
             password:"",
             CreatedAt: "",
@@ -40,65 +42,29 @@ class PatientInfobyS extends Component {
         });
       }
     
-    getPatient = () => {
+      getPatient(){
+        fetch(`http://localhost:5000/patient/getbyid/${this.props.match.params.id}`,
+        {method:"GET"})
+          .then(response => response.json()) 
+          .then(data => {
+            console.log("GETONE", data);
+       
+            
+            this.setState(data)           
+        })
+      }
+    
 
-      axios.get(`http://127.0.0.1:8000/patient/get/${this.props.match.params.id}`,
-          {
-              headers: {
-                  Authorization: 'Bearer ' + localStorage.getItem("token")
-              }
-          })
-
-          .then((u) => {
-              this.setState({
-                nom: u.data.data.data.nom,
-                prenom: u.data.data.data.prenom,
-                address: u.data.data.data.address,
-                  email: u.data.data.data.email,
-
-                  tel: u.data.data.data.tel,
-                  genre: u.data.data.data.genre,
-                  date_naissance: u.data.data.data.date_naissance,
-                  remarque: u.data.data.data.remarque,
-                  CreatedAt: u.data.data.data.CreatedAt,
-                  UpdatedAt: u.data.data.data.UpdatedAt
-              });
-          })
-          .catch((err) => alert(err))
+  componentDidMount = () => {
+      this.getPatient();
   }
+
+
   onchange= (event) => {
     this.setState({remarque: event.target.value});
     
   }
-  componentDidMount = () => {
-      this.getPatient();
-  }
-  handleSubmit = () => {
-    
-    
-    let token = localStorage.getItem("token");
-    if (!token) {
-        token = "";
-    }
-    axios.post("http://127.0.0.1:8000/patient/register/${item.Id}", {
-      remarque:this.state.remarque,
-      
-
-    },
-
-  ).then(success => {
-      // if status 200 OK
-      if (typeof (success.data.error) != "undefined" && success.data.error !== "") {
-        ToastsStore.error(success.data.error)
-      } else if (typeof (success.data.message) != "undefined" && success.data.message !== "") {
-        ToastsStore.success(success.data.message)
-        this.props.history.push("/medecin/info");
-      }
-    }).catch(err => {
-      ToastsStore.error("Server error")
-    })
-
-}
+ 
 
 
     render() {

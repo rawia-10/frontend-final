@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { HashRouter, Route, Switch } from 'react-router-dom';
+import { HashRouter, Route, Switch,Redirect, BrowserRouter} from 'react-router-dom';
 // import { renderRoutes } from 'react-router-config';
 import './App.scss';
-import Navbar from './Navbar';
-import Footer from './Footer'
+
+// import Navbar from './Navbar';
+// import Footer from './Footer'
 const loading = () => <div className="animated fadeIn pt-3 text-center">Loading...</div>;
 
 // Containers
@@ -21,10 +22,12 @@ const RegisterM =React.lazy(()=>import('./views/Pages/RegisterM'));
 const Patient =React.lazy(()=>import('./views/Pages/Patient'));
 const LoginP =React.lazy(()=>import('./views/Pages/LoginP'));
 const Medecin =React.lazy(()=>import('./views/Pages/medecin'));
+const Medecininfo =React.lazy(()=>import('./views/Pages/medecin'));
 const RegisterP = React.lazy(() => import('./views/Pages/RegisterP'));
 const Infomedecin  = React.lazy(() => import('./views/Pages/medecin/medecinInfo'))
 const Info = React.lazy(() => import('./views/Pages/Patient/Info'))
 class App extends Component {
+ 
 
   render() {
     return (
@@ -37,7 +40,7 @@ class App extends Component {
               <Route exact path="/loginsecretaire" name="Login Page" render={props => <Logins {...props}/>} />
               <Route exact path="/loginmedecin" name="Login Page" render={props => <LoginM {...props}/>} />
               <Route exact path="/loginpatient" name="Login Page" render={props => <LoginP {...props}/>} />
-              <Route exact path="/infomedecin" name="Login Page" render={props => <Infomedecin {...props}/>} />
+              <Route exact path="/infomedecin/:id" name="Login Page" render={props => <Infomedecin {...props}/>} />
               <Route exact path="/register" name="Register Page" render={props => <Register {...props}/>} />7
               <Route exact path="/registerP" name="Register Page" render={props => <RegisterP {...props}/>} />
               <Route exact path="/registerM" name="Register Page" render={props => <RegisterM {...props}/>} />
@@ -46,6 +49,7 @@ class App extends Component {
               <Route exact path="/Patient" name="Page Patient" render={props => <Patient {...props}/>} />  
               <Route exact path="/Medecin" name="Page Medecin" render={props => <Medecin {...props}/>} /> 
               <Route exact path="/Info" name="Page Medecin" render={props => <Info {...props}/>} /> 
+              <Route exact path="/Medecininfo" name="Page Medecin" render={props => <Medecininfo {...props}/>} />
               <Route path="/" name="Home" render={props => <DefaultLayout {...props}/>} />
 
 

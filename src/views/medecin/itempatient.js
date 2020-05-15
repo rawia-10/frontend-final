@@ -55,11 +55,7 @@ class ItemPatient extends Component {
 
             <tr>
                 <td >{item.nom} {item.prenom}</td>
-                <td >{item.email}</td>
-                <td >{item.address}</td>
-                <td >{item.tel}</td>
-                <td>{item.genre} </td>
-          <td>{item.date_naissance}</td>
+             
                 <td >
                     <div className="row ">
                     <Link to={`/medecin/info/${item.Id}`}>

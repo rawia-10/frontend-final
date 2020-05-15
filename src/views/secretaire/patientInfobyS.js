@@ -22,36 +22,54 @@ class PatientInfobyS extends Component {
             date_naissance:"",
             email:"",
             tel:"",
+           
             password:"",
+          
             CreatedAt: "",
             UpdatedAt: ""
         };
     }
 
-    getPatient = () => {
+    // getPatient = () => {
+      
+    //     fetch("http://localhost:5000/patient/getbyid", {method: "GET"})
+    //     .then(response => response.json())
 
-      axios.get(`http://127.0.0.1:8000/patient/get/${this.props.match.params.id}`,
-          {
-              headers: {
-                  Authorization: 'Bearer ' + localStorage.getItem("token")
-              }
-          })
-
-          .then((u) => {
-              this.setState({
-                nom: u.data.data.data.nom,
-                prenom: u.data.data.data.prenom,
-                address: u.data.data.data.address,
-                  email: u.data.data.data.email,
-               tel: u.data.data.data.tel,
-                  genre: u.data.data.data.genre,
-                  date_naissance: u.data.data.data.date_naissance,
-                  CreatedAt: u.data.data.data.CreatedAt,
-                  UpdatedAt: u.data.data.data.UpdatedAt
-              });
-          })
-          .catch((err) => alert(err))
-  }
+    //     .then(data => {
+    //       console.log("patient", data);
+    //       this.setState({patient: data})
+    //     })
+    
+//   }
+//   componentDidMount(){
+//     this.getOne();
+//     }
+    
+    getPatient(){
+        fetch(`http://localhost:5000/patient/getbyid/${this.props.match.params._id}`)
+        //   .then(response => response.json()) 
+        .then((u) => {
+            this.setState({
+              nom: u.data.data.data.nom,
+              prenom: u.data.data.data.prenom,
+              address: u.data.data.data.address,
+                email: u.data.data.data.email,
+              
+                tel: u.data.data.data.tel,
+                genre: u.data.data.data.genre,
+                date_naissance: u.data.data.data.date_naissance,
+            
+                CreatedAt: u.data.data.data.CreatedAt,
+                UpdatedAt: u.data.data.data.UpdatedAt
+            });
+        })
+        .catch((err) => alert(err))
+        
+        
+        
+        
+      }
+    
 
   componentDidMount = () => {
       this.getPatient();

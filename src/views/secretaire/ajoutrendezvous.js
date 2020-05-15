@@ -151,18 +151,27 @@ onchange= (event) => {
        
 
        
- <FormGroup row>
+                  <FormGroup row>
                     <Col md="3">
-                      <Label htmlFor="text-input">heure</Label>
+                      <Label>Heure</Label>
                     </Col>
-                    <Col xs="12" md="9">
-                      <Input   defaultValue={this.state.heure} 
-                      onChange={evenement=>this.setState({heure:evenement.target.value})}
-                       type="text" id="text-input" name="text-input"/>
-                    
+                    <Col md="9">
+                    <select className="select-css" name="select" id="select" required placeholder="Genre"  defaultValue={this.state.heure}
+                    onChange={evenement=>this.setState({heure:evenement.target.value})}>
+                    <option value={"0"}> Choisir Heure </option>
+                            <option value="8 H"> 8H</option>
+                             <option value="9 H"> 9H </option>       
+                             <option value="10 H"> 10H</option>
+                             <option value="11 H">  11H </option>  
+                             <option value="14 H"> 14H</option>
+                             <option value="15 H">  15H </option>   
+                             <option value="16 H"> 16H</option>
+                            
+                   </select>
+
                     </Col>
-                  </FormGroup> 
-              
+                  </FormGroup>
+
                   <FormGroup row>
                     <Col md="3">
                       <Label htmlFor="text-input">tel</Label>

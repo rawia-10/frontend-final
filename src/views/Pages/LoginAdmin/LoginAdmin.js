@@ -44,81 +44,82 @@ class LoginAdmin extends Component {
 	};
 
 
-  login() {
+  Login=()=> {
     axios.post("http://localhost:5000/admin/login", {
-      email: this.state.email,
-      password: this.state.password
+      email:this.state.email,
+      password:this.state.password
     })
       .then(res => {
-        
+  
         if (res.data['status'] === "error") {
-          alert(" verifier votre login ou password")   
+          alert(" verifier votre login ou password")
         }
         else {
-
-      
+  
+  
            console.log(res.data.data.token);
-          
+  
            //console.log(JSON.parse(JSON.stringify(JSON.parse(JSON.stringify(res)).data)).user);
-         
-
- 
-							if (res.data.data.user.role.nom=== 'vendeur' ) {
+  
+  
+  
+              if (res.data.data.user.role.nom=== 'admin' ) {
                 localStorage.setItem('role', res.data.data.user.role.nom);
-								this.props.history.push('/home/produit'); //redirection mrigla zeda
-							}
+                this.props.history.push('/admin/listesecretaire'); //redirection mrigla zeda
+              }
         }
-
+  
       })
   }
-  validate = () => {
+  
+  // validate = () => {
 
-    let isError = false;
+  //   let isError = false;
 
-    const errors = {
-      EmailErr: "",
-      PasswordErr: "",
-    }
+  //   const errors = {
+  //     EmailErr: "",
+  //     PasswordErr: "",
+  //   }
 
-    console.log("login ",this.state.email);
-    console.log("pws ",this.state.password);
-
-
-
-    const regex1=/^[a-zA-Z0-9._-]+$/;
-
-
-    if ((this.state.email==="")||(this.state.Emaemailil.length > 30)||!regex1.test(this.state.email)) {
-
-      isError = true;
-      errors.EmailErr = "Veuillez verifier votre Email";
-    }
-
-
-    if ((this.state.password==="")||(this.state.password.length > 20)) {
-
-      isError = true;
-      errors.PasswordErr = "veuillez verifier votre mot de passe";
-    }
+  //   console.log("login ",this.state.email);
+  //   console.log("pws ",this.state.password);
 
 
 
-    if (isError) {
-      this.setState({
-        ...this.state,
-        ...errors
-      })
-    }
-
-    console.log("errrr ", isError)
+  //   const regex1=/^[a-zA-Z0-9._-]+$/;
 
 
-    this.setState({
-      erreur:isError
-    })
+  //   if ((this.state.email==="")||(this.state.Emaemailil.length > 30)||!regex1.test(this.state.email)) {
 
-    return isError;
-  }
+  //     isError = true;
+  //     errors.EmailErr = "Veuillez verifier votre Email";
+  //   }
+
+
+  //   if ((this.state.password==="")||(this.state.password.length > 20)) {
+
+  //     isError = true;
+  //     errors.PasswordErr = "veuillez verifier votre mot de passe";
+  //   }
+
+
+
+  //   if (isError) {
+  //     this.setState({
+  //       ...this.state,
+  //       ...errors
+  //     })
+  //   }
+
+  //   console.log("errrr ", isError)
+
+
+  //   this.setState({
+  //     erreur:isError
+  //   })
+
+  //   return isError;
+  // }
   render() {
     return (
       <div className="y">
@@ -193,7 +194,7 @@ class LoginAdmin extends Component {
                   }
                     <Row>
                       <Col xs="6">
-                        <Button color="primary" className="px-4" onClick={this.login}>
+                        <Button color="primary" className="px-4" onClick={this.Login}>
                           Login
                         </Button>
                       </Col>
