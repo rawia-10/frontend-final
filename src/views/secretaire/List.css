@@ -46,3 +46,12 @@ right: 168PX;
   margin-left: 35%;
   /* transform: translate(-50%, -50%); */
 }
+.tablel .tbody{
+  font-family: sans-serif;
+  border: thin solid #6495ed;
+  width: 70%;
+  padding: 5px;
+  text-align: center;
+  background-color: #ffffff;
+ 
+}

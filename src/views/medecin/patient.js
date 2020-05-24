@@ -27,18 +27,24 @@ class Tables extends Component {
           patient: [],
           currentPage: 1,
       todosPerPage: 5,
-
+      info: false,
+      remarque:"",
         keyword:""
 
     };
-   
+    this.toggleInfo = this.toggleInfo.bind(this);
+
     this.handleClick = this.handleClick.bind(this);
 
     this.handleLastClick = this.handleLastClick.bind(this);
 
     this.handleFirstClick = this.handleFirstClick.bind(this);
     }
-    
+   toggleInfo() {
+    this.setState({
+      info: !this.state.info,
+    });
+  }  
     
     handleClick(event) {
 
@@ -111,8 +117,7 @@ handleFirstClick(event) {
        
       
 
-
-
+   
 
 
   render() {
@@ -154,7 +159,13 @@ handleFirstClick(event) {
 
      
 
+      <Row> 
+          <Col xs="12" lg="6"><img src="../img/team.png" /> Patient</Col>
+          <Col  xs="12" lg="6">
+    {/* <Button color="info" onClick={this.toggleInfo}>Ajouter Remarque</Button> */}
+     </Col>
 
+        </Row>
 
       <Row>
      
@@ -197,12 +208,10 @@ handleFirstClick(event) {
                    <td>{item.address}</td>
                    <td>{item.tel}</td>
                    <td>
-                
-                   <Link to={`/medecin/info/${item._id}`}>
-                    
-                            <i className="fa fa-info-circle t-green fa-lg" onClick={this.getPatient}></i>
-                       
-                  </Link>
+                   <Link to={`/medecin/info/${item._id}`}  className="view" title="view" data-toggle="tooltip">    <i className="fa fa-eye" style={{fontSize: '24px'}} /></Link>
+                   {/* <Link to={`/medecin/info/${._id}`}>
+                   <i className="fa fa-info-circle t-green fa-lg" onClick={this.getPatient}></i>
+                  </Link> */}
 
                   
                    </td>

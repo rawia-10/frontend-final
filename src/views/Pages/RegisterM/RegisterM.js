@@ -1,18 +1,17 @@
-import dotenv from  'dotenv'
 import React, { Component } from 'react';
-import { Button, Card, CardBody, CardFooter,CardGroup, Col, Container, Form, Input, InputGroup, InputGroupAddon, InputGroupText, Row } from 'reactstrap';
+import { Button, Card,FormGroup, CardBody, CardFooter, Label,Col,radio, Container, Form, Input, InputGroup, InputGroupAddon, InputGroupText, Row } from 'reactstrap';
+import axios from 'axios';
 import { Link } from 'react-router-dom';
 import image from '../logo.png';
 import { ToastsContainer, ToastsStore } from 'react-toasts';
-import axios from 'axios';
-import JwtDecode from 'jwt-decode';
-import Switch from "react-switch";
+class Register extends Component {
 
-class RegisterM extends Component {
 
   constructor(props) {
     super(props);
 
+    this.toggle = this.toggle.bind(this);
+    this.toggleFade = this.toggleFade.bind(this);
     this.state = {
       collapse: true,
       fadeIn: true,
@@ -24,27 +23,58 @@ class RegisterM extends Component {
       date_naissance:"",
       email:"",
       tel:"",
-      specialite:"",
       password:"",
-      checked: false ,
-      assurance_maladie:"",
-      fix:"",
-      image:""
-      
+      medecin: [],
+     
+
     };
-    this.handleChange = this.handleChange.bind(this);
-    dotenv.config()
-
   }
 
-  handleChange(checked) {
-    this.setState({ checked });
+  toggle() {
+    this.setState({ collapse: !this.state.collapse });
   }
 
+  toggleFade() {
+    this.setState((prevState) => { return { fadeIn: !prevState }});
+  }
 
-handleSubmit = () => {
+  handleChange = e => {
+		if (e.target.name === 'nom') {
+			this.setState({ nom: e.target.value });
+    }
+    if (e.target.name === 'prenom') {
+			this.setState({ prenom: e.target.value });
+    }
+    if (e.target.name === 'address') {
+			this.setState({ address: e.target.value });
+    }
+    if (e.target.name === 'genre') {
+			this.setState({ genre: e.target.value });
+    }
+    if (e.target.name === 'date_naissance') {
+			this.setState({ date_naissance: e.target.value });
+    }
+    if (e.target.name === 'email') {
+			this.setState({ email: e.target.value });
+    }
+    if (e.target.name === 'tel') {
+			this.setState({ tel: e.target.value });
+		}
 
-  axios.post("http://127.0.0.1:5000/medecin/addmedecin", {
+		if (e.target.name === 'password') {
+			this.setState({ password: e.target.value });
+    }
+
+
+
+
+
+	};
+
+
+  handleSubmit = () => {
+
+    axios.post("http://localhost:5000/medecin/addmedecin", {
       nom:this.state.nom,
       prenom:this.state.prenom,
       genre:this.state.genre,
@@ -53,45 +83,32 @@ handleSubmit = () => {
       password:this.state.password,
       tel:this.state.tel,
       date_naissance:this.state.date_naissance,
-      specialite:this.state.specialite,
-      assurance_maladie:this.state.assurance_maladie,
-      fix:this.state.fix, 
-      image:this.state.image,
-
-  },
 
 
-)   .then(res=>{
-  console.log("data",res.data)
-  window.location.href="/#/loginmedecin"
-})
-}
-onchange= (event) => {
-  this.setState({email: event.target.value});
-  this.setState({password: event.target.value});
-  this.setState({nom: event.target.value});
-  this.setState({prenom: event.target.value});
-  this.setState({address: event.target.value});
-  this.setState({genre: event.target.value});
-  this.setState({tel: event.target.value});
-  this.setState({email: event.target.value});
-  this.setState({date_naissance: event.target.value});
-  this.setState({password: event.target.value});
-  this.setState({specialite: event.target.value});
-  this.setState({assurance_maladie : event.target.value});
-  this.setState({fix : event.target.value});
-  this.setState({image: event.target.value});
-  
+    },
+
+
+  )   .then(res=>{
+    console.log("data",res.data)
+    window.location.href="/#/loginmedecin"
+  })
 }
 
-  render() { 
-    return (  
 
 
-      <div>
-             <ToastsContainer store={ToastsStore} />
 
-             <header className="main_menu home_menu">
+
+
+
+  render() {
+
+    return (
+
+
+      <div >
+
+
+<header className="main_menu home_menu">
         <div className="container">
           <div className="row align-items-center">
             <div className="col-lg-12">
@@ -115,6 +132,7 @@ onchange= (event) => {
                     <Link to="login" className="nav-link">Contact</Link>
                     </li>
                  
+
                
                     <li className="nav-item dropdown">
   <a className="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -152,17 +170,13 @@ onchange= (event) => {
      
  <section className="banner_partee">
      </section>
-
-
-
-
  {/* Sign up form */}
  <section className="signup">
           <div className="containere">
             <div className="signup-content">
               <div className="signup-form">
-                <h2 className="form-title">S'inscrire</h2>
-              
+              <h2 className="form-title">S'inscrire</h2>
+
                 <Form method="" className="f" >
 
                 <InputGroup className="mb-3">
@@ -188,7 +202,7 @@ onchange= (event) => {
                   <InputGroup className="mb-3">
                   <InputGroupAddon addonType="prepend">
                   <InputGroupText>
-                    <span>@</span>
+                   <span>@</span>
                   </InputGroupText>
                 </InputGroupAddon>
                     <Input defaultValue={this.state.email} required
@@ -198,7 +212,7 @@ onchange= (event) => {
                   <InputGroup className="mb-3">
                   <InputGroupAddon addonType="prepend">
                   <InputGroupText>
-                  <i className="icon-lock"></i>
+                    <i className="icon-lock"></i>
                   </InputGroupText>
                 </InputGroupAddon>
                     <Input defaultValue={this.state.password} required
@@ -208,7 +222,7 @@ onchange= (event) => {
                 <InputGroup className="mb-3">
                   <InputGroupAddon addonType="prepend">
                   <InputGroupText>
-                  <i className="icon-lock"></i>
+                    <i className="icon-lock"></i>
                   </InputGroupText>
                 </InputGroupAddon>
                     <Input defaultValue={this.state.password} required
@@ -218,7 +232,7 @@ onchange= (event) => {
                   <InputGroup className="mb-3">
                   <InputGroupAddon addonType="prepend">
                   <InputGroupText>
-                  <span>+216</span>
+                    <span>+216</span>
                   </InputGroupText>
                 </InputGroupAddon>
                     <Input defaultValue={this.state.tel} required
@@ -228,21 +242,11 @@ onchange= (event) => {
                   <InputGroup className="mb-3">
                   <InputGroupAddon addonType="prepend">
                   <InputGroupText>
-                   <span>+216</span> 
-                  </InputGroupText>
-                </InputGroupAddon>
-                    <Input defaultValue={this.state.fix} required
-                      onChange={evenement=>this.setState({fix:evenement.target.value})} type="Number" name="re_pass" id="re_pass" placeholder="Téléphone fixe" />
-                  </InputGroup>
-
-                  <InputGroup className="mb-3">
-                  <InputGroupAddon addonType="prepend">
-                  <InputGroupText>
                   <i className="icon-location-pin"></i>
                   </InputGroupText>
                 </InputGroupAddon>
                     <Input   defaultValue={this.state.address} required
-                      onChange={evenement=>this.setState({address:evenement.target.value})} type="text" name="re_pass" id="re_pass" placeholder="adresse" />
+                      onChange={evenement=>this.setState({address:evenement.target.value})} type="text" name="re_pass" id="re_pass" placeholder="Adresse" />
                   </InputGroup>
                  
                   <InputGroup className="mb-3">
@@ -259,9 +263,10 @@ onchange= (event) => {
                  <InputGroup className="mb-3">
                   <InputGroupAddon addonType="prepend">
                   <InputGroupText>
-                    <i className="fa fa-venus-mars"></i> 
+                  <i className="fa fa-venus-mars"></i> 
                   </InputGroupText>
                 </InputGroupAddon>
+
                   <select className="select-css" name="select" id="select" required placeholder="Genre"  defaultValue={this.state.genre}
                     onChange={evenement=>this.setState({genre:evenement.target.value})}>
                     <option value={"0"}> Choisir votre genre </option>
@@ -270,49 +275,9 @@ onchange= (event) => {
                    </select>
                   </InputGroup>
 
-                 
-                  <InputGroup className="mb-3">
-                  <InputGroupAddon addonType="prepend">
-                  <InputGroupText>
-                    <i className="icon-user"></i>
-                  </InputGroupText>
-                </InputGroupAddon>
-                  <select className="select-css" name="select" id="select" required placeholder="Genre"  defaultValue={this.state.specialite}
-                    onChange={evenement=>this.setState({specialite:evenement.target.value})}>
-                    <option value={"0"}>  votre specialite </option>
-                            <option value="genecologue"> genecologue</option>
-                             <option value="dentiste">  dentiste </option>        
-                   </select>
-                  </InputGroup>
-          
 
-            
-  
-                  <InputGroup className="mb-3">
-                  <InputGroupAddon addonType="prepend">
-                  <InputGroupText>
-                    <i className="icon-picture"></i>
-                  </InputGroupText>
-                </InputGroupAddon>
-                  <Input  type="file" placeholder="image"  defaultValue={this.state.image}
-                    onChange={evenement=>this.setState({image:evenement.target.value})}>
-                         
-                   </Input>
-                  </InputGroup>
-                  
-                  {/* <InputGroup className="mb-3">
-                  <InputGroupAddon addonType="prepend">
-                  <InputGroupText>
-                    <i className="icon-user"></i>
-                  </InputGroupText>
-                </InputGroupAddon>
-                  <Input  type="file" placeholder="image"  defaultValue={this.state.image}
-                    onChange={evenement=>this.setState({image:evenement.target.value})}>
-                         
-                   </Input>
-                  </InputGroup> */}
 
-                 <div className="form-group">
+                  <div className="form-group">
                     <Input type="checkbox" name="agree-term" id="agree-term" className="agree-term"  required/>
                     <label htmlFor="agree-term" className="label-agree-term"><span><span /></span>I agree all statements in  <a href="#" className="term-service">Terms of service</a></label>
                   </div>
@@ -330,20 +295,14 @@ onchange= (event) => {
               
               </div>
               <div className="signup-image">
-                <figure><img src="images/signup-imagem.jpg" alt="sing up image" /></figure>
-                <Link to="loginmedecin" className="signup-image-link">Je suis déjà membre</Link>
+                <figure><img src="images/signup-imagep.jpg" alt="sing up image" /></figure>
+                <Link to="loginsecretaire" className="signup-image-link">Je suis déjà membre</Link>
               </div>
             </div>
           </div>
         </section>
-       
-
         <section >
      </section>
-
-
-
-
 
         <footer className="footer-area">
   <div className="footer section_padding">
@@ -395,12 +354,12 @@ onchange= (event) => {
 
 
 
-            
-
-
       </div>
+
+
+
     );
   }
 }
- 
-export default RegisterM;
+
+export default Register;

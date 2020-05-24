@@ -53,45 +53,30 @@ class rqpatient extends Component {
       }
     
     
-      handleSubmit = () => {
-    
-    
-        let token = localStorage.getItem("token");
-        if (!token) {
-            token = "";
-        }
-        axios.post("http://127.0.0.1:8000/patient/register/${item.Id}", {
-          remarque:this.state.remarque,
-          
-    
-        },
-    
-      ).then(success => {
-          // if status 200 OK
-          if (typeof (success.data.error) != "undefined" && success.data.error !== "") {
-            ToastsStore.error(success.data.error)
-          } else if (typeof (success.data.message) != "undefined" && success.data.message !== "") {
-            ToastsStore.success(success.data.message)
-            this.props.history.push("/home/listepatients");
-          }
-        }).catch(err => {
-          ToastsStore.error("Server error")
-        })
-    
-    }
-    
-    
+      onChange= (event) => {
+        this.setState({remarque: event.target.value});
+        
+      }
+     
+      handelSubmit()
+      {
+        
+          axios.post("http://localhost:5000/portfolio/addportfolio",{
+            remarque:this.state.remarque,
+         
+         
+          })
+      .then(res=>{
+        console.log("data",res.data);
+        window.location.href="/#/home/listepatients"
+      })
+      
+      }
       reset()
       {
           this.setState({remarque:""})
       }
-    
-    
-    
-    onchange= (event) => {
-        this.setState({remarque: event.target.value});
-        
-      }
+  
       render() {
         return (
           <div className="animated fadeIn">
@@ -120,7 +105,7 @@ class rqpatient extends Component {
     </Form>
                   </CardBody>
                   <CardFooter>
-                    <Button onClick={this.handleSubmit} type="submit" size="sm" color="primary"><i className="fa fa-dot-circle-o"></i> Ajouter</Button>
+                    <Button onClick={this.handelSubmit.bind(this)} type="submit" size="sm" color="primary"><i className="fa fa-dot-circle-o"></i> Ajouter</Button>
                     <Button  onClick={this.reset} type="reset" size="sm" color="danger"><i className="fa fa-ban"></i> Annuler</Button>
                   </CardFooter>
                 </Card>

@@ -4,6 +4,9 @@ display-flex, .display-flex, .display-flex-center, .signup-content, .signin-cont
 
   display: flex;
   display: -webkit-flex; }
+  .sign-in{
+    background-image: url("../img//banner_bg.png");
+  }
 
 /* @extend list-type-ulli; */
 list-type-ulli, .socials {
@@ -194,8 +197,9 @@ h2 {
 .clear {
   clear: both; }
 
-  /* body {
+   /* body {
     font-size: 13px;
+    background-image: url(../img/banner_bg.png);
     line-height: 1.8;
     color: #222;
     background: #f8f8f8;
@@ -458,7 +462,9 @@ h2 {
   
   .signin-content {
     padding-top: 67px;
-    padding-bottom: 87px; }
+    padding-bottom: 87px;
+ 
+  }
   .imageee{
     padding-top:20px;
     padding-bottom: 20px;
@@ -3327,7 +3333,12 @@ ul {
   background-repeat: no-repeat;
   /* background-size: 100% 100%; */
    background-position: center; 
+   background-size: cover;
+ 
 }
+
+
+
 @media (max-width: 991px) {
   /* line 2, ../../01 cl html template/03_jun 2019/182_medico_html/sass/_banner.scss */
   .banner_part {

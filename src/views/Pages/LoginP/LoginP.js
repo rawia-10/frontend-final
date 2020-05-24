@@ -283,9 +283,8 @@ validate = () => {
         </section>
       
       
-        <section className="imageee" >
+        <section className="banner_partee">
      </section>
-
         <footer className="footer-area">
   <div className="footer section_padding">
     <div className="container">

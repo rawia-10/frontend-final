@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Badge, Card, CardBody, CardHeader, Col, Pagination, PaginationItem, PaginationLink, Row, Table } from 'reactstrap';
+import { Badge, Card, CardBody, CardHeader,Button, Col, Pagination, PaginationItem, PaginationLink, Row, Table } from 'reactstrap';
 
 import {Link} from 'react-router-dom'
 
@@ -14,7 +14,8 @@ class Tables extends Component {
         this.state={// declaration des attribue
             patient:[],
         currentPage: 1,
-        todosPerPage: 5
+        todosPerPage: 5,
+        keyword:"",
   
     };
     this.handleClick = this.handleClick.bind(this);
@@ -59,7 +60,7 @@ handleClickEdit(e,id){
           e.preventDefault();
             console.log("id",id);
             localStorage.setItem("idc",id);
-              window.location.href="/#/home/"
+              window.location.href="/#/secretaire/update"
                          } 
 
 getall(){
@@ -97,6 +98,9 @@ handleClickDelete(e,id){
   }
 
 
+  handelChange=(e)=>{
+    this.setState({keyword:e.target.value})
+  }
 
   render() {
 let {patient, currentPage, todosPerPage} = this.state;
@@ -122,64 +126,69 @@ next = (last === currentPage) ? currentPage : currentPage + 1;
       
     return (
       <div className="animated fadeIn">
+        <Row> 
+          <Col xs="12" lg="6"><img src="/img/team.png" style={{height: '500px width:50px'}} /> Patient</Col>
+          <Col  xs="12" lg="6">
+     <Link to="/home/ajoutpatient">     <Button color="info">Ajouter Patient</Button></Link>
+     </Col>
+        </Row>
         <Row>
+          {/*  */}
           <Col xs="12" lg="12">
             <Card>
               <CardHeader>
-                <i className="fa fa-align-justify"></i> Liste des patient
+                 Liste Patient
               </CardHeader>
-              <CardBody>
-                <Table responsive>
+             <CardBody>
+              <form action="#" class="menu_search_form">
+        <input onChange={this.handelChange}
+        type="text" class="menu_search_input" placeholder="Search" required="required"/>
+        <button class="menu_search_button"><i class="fa fa-search" aria-hidden="true"></i></button>
+         </form>
+                <Table className="tablel" responsive bordered>
                   <thead>
                   <tr>
-                    <th>name</th>
+                  <th>nom </th>
                     <th>prenom</th>
-                    <th>date naissance</th>
+                    {/* <th>date naissance</th>
                     <th>genre</th>
-                    <th>email</th>
-                    <th>adresse</th>
+                    <th>email</th>*/}
+                    <th>adresse</th> 
                     <th>Télephone</th>
                     <th>Actions</th>
-               
                   </tr>
                   </thead>
                   <tbody>{
-                   
-                   currentTodos.map((item,index) =>{
+                   currentTodos.filter(item =>item.nom.toUpperCase().includes(this.state.keyword.toUpperCase().trim())).map((item,index)=>{
                    return(
                    <tr key={index}>
-                   <td>{item.nom}</td>
+                   <td>{item.nom} </td>
                    <td>{item.prenom}</td>
-                   <td>{item.date_naissance}</td>
-                   <td>{item.genre}</td>
-                   <td>{item.email}</td>
+                   {/* <td>{item.date_naissance}</td> */}
+                   {/* <td>{item.genre}</td>
+                   <td>{item.email}</td> */}
                    <td>{item.address}</td>
                    <td>{item.tel}</td>
                    <td>
-                   {/* <td> <img src={`http://localhost:5000/patient/getfile/${item.image}`}height="50" width="50"/> */}
-                  
-                   <Link to={`/secretaire/info/${item._id}`}>
-                    
-                            <i className="fa fa-info-circle t-green fa-lg" onClick={this.getPatient}></i>
-                       
-                  </Link>
+                  <div>
+  {/* <link to="{`/secretaire/info/${item._id}`}" />    
+  <button color="info">Info</button> 
+  <button color="success" onclick="{evt=">this.handleClickEdit(evt,item._id){'}'}&gt;Modifier</button>
+  <button color="danger" onclick="{evt=">this.handleClickDelete(evt,item._id){'}'}&gt;Supprimer</button> */}
 
-                  <i class='fa fa-edit fa-lg mt-4' style={{color:"green"}} 
-                   onClick={evt=>this.handleClickEdit(evt,item._id)}
-                   ></i>
-                   
-                    <i 
-                   onClick={evt=>this.handleClickDelete(evt,item._id)}
-                    
-                    class='fa fa-trash fa-lg mt-4' style={{color:"red"}}
-                    ></i></td>
-                   </tr>
-                   );
-                   })
-                   }
-                   </tbody>
+
+  <Link to={`/secretaire/info/${item._id}`}  className="view" title="view" data-toggle="tooltip">    <i className="fa fa-eye" style={{fontSize: '24px'}} /></Link>
+  <i className="edit" title="Edit" data-toggle="tooltip"  onClick={evt=>this.handleClickEdit(evt,item._id)}  className="fa fa-edit" style={{fontSize: '24px',color:"green"}}></i>
+  <i className="delete" title="Delete" data-toggle="tooltip" className="fa fa-trash-o" style={{fontSize: '24px', color: 'red'}} onClick={evt=>this.handleClickDelete(evt,item._id)}  ></i>
+
+  </div>
+                    </td>
+                  </tr>
+                 );
+                })
+                }
+                  </tbody>
                 </Table>
-
                 <nav>
    
    <Pagination>

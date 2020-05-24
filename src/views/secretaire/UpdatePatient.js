@@ -79,7 +79,7 @@
  
  
  
- onchange= (event) => {
+ onChange= (event) => {
      this.setState({nom: event.target.value});
      this.setState({prenom: event.target.value});
      this.setState({email: event.target.value});
@@ -105,8 +105,8 @@
    }
  
    handelSubmit() {   
-    console.log("state", this.state.nom,this.state.prenom ,this.state.email
-    ,this.state.genre ,this.state.address,this.state.tel,this.state.date_naissance);
+    // console.log("state", this.state.nom,this.state.prenom ,this.state.email
+    // ,this.state.genre ,this.state.address,this.state.tel,this.state.date_naissance);
     if (this.state.nom === "") {
       this.state.nom= this.state.patient.nom
       }
@@ -181,11 +181,11 @@
 
                   <FormGroup row>
                     <Col md="3">
-                      <Label htmlFor="text-input">prenom</Label>
+                      <Label htmlFor="text-input">prénom</Label>
                     </Col>
                     <Col xs="12" md="9">
                       <Input   defaultValue={this.state.patient.prenom}
-                      onChange={this.handleChange}
+                      onChange={event => this.setState({prenom: event.target.value})}
                        type="text" id="text-input" name="text-input"/>
 
                     </Col>
@@ -194,11 +194,11 @@
 
                   <FormGroup row>
                     <Col md="3">
-                      <Label htmlFor="text-input">address</Label>
+                      <Label htmlFor="text-input">adresse</Label>
                     </Col>
                     <Col xs="12" md="9">
                       <Input   defaultValue={this.state.patient.address}
-                      onChange={this.handleChange}
+                        onChange={event => this.setState({address: event.target.value})}
                        type="text" id="text-input" name="text-input"/>
 
                     </Col>
@@ -210,7 +210,7 @@
                     </Col>
                     <Col xs="12" md="9">
                       <Input   defaultValue={this.state.patient.email}
-                      onChange={this.handleChange}
+                        onChange={event => this.setState({email: event.target.value})}
                        type="email" id="email-input" name="email-input"  autoComplete="email"/>
 
                     </Col>
@@ -224,7 +224,7 @@
                     </Col>
                     <Col xs="12" md="9">
                       <Input defaultValue={this.state.patient.date_naissance}
-                     onChange={this.handleChange}
+                    onChange={event => this.setState({date_naissance: event.target.value})}
                        type="date" id="date-input" name="date-input"  />
                     </Col>
                   </FormGroup>
@@ -232,11 +232,11 @@
 
               <FormGroup row>
                     <Col md="3">
-                      <Label htmlFor="tel-input">telephone</Label>
+                      <Label htmlFor="tel-input">Téléphone</Label>
                     </Col>
                     <Col xs="12" md="9">
                       <Input defaultValue={this.state.patient.tel}
-                      onChange={this.handleChange}
+                       onChange={event => this.setState({tel: event.target.value})}
                       type="number" id="tel" name="tel" autoComplete="tel" />
 
                     </Col>
@@ -249,7 +249,7 @@
                     </Col>
                     <Col md="9">
                     <select className="select-css" name="select" id="select" required placeholder="Genre"  defaultValue={this.state.patient.genre}
-                    onChange={this.handleChange}>
+                   onChange={event => this.setState({genre: event.target.value})}>
                     <option value={"0"}> Choisir votre genre </option>
                             <option value="Femme"> Femme</option>
                              <option value="Homme">  Homme </option>        
@@ -261,7 +261,7 @@
 </Form>
               </CardBody>
               <CardFooter>
-                <Button onClick={this.handelSubmit} type="submit" size="sm" color="primary"><i className="fa fa-dot-circle-o"></i> Envoyer</Button>
+                <Button onClick={this.handelSubmit.bind(this)} type="submit" size="sm" color="primary"><i className="fa fa-dot-circle-o"></i> Envoyer</Button>
                 <Button  onClick={this.reset} type="reset" size="sm" color="danger"><i className="fa fa-ban"></i> Annuler</Button>
               </CardFooter>
             </Card>

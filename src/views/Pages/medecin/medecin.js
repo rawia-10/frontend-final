@@ -219,7 +219,7 @@ handlechange=(e)=>{
           onClick = {evt => this.handleClickDelete(evt,item._id)}></i> */}
             <Link to={`/infomedecin/${item._id}`}>
       
-              <a className="btn_3 d-none d-lg-block" href="#">Prendre rendez-vous</a>
+            <button type="button" className="btn btn-info font-weight-bold  ">Prendre rendez-vous</button>
               </Link>
         </td>
          </tr>

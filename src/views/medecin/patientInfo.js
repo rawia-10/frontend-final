@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { Card, CardBody, Col, Row ,
-    Button, CardHeader, Modal, ModalBody, ModalFooter, ModalHeader, 
-    Input,Label,FormGroup} from 'reactstrap';
+import { Badge, Card,Form, CardBody,Button, CardHeader, Col, Pagination, PaginationItem, PaginationLink,  Table
+    , CardFooter,CardGroup, Modal, ModalBody, ModalFooter, ModalHeader, Container, Input, InputGroup, InputGroupAddon, InputGroupText, Row,
+    FormGroup,Label}
+    from 'reactstrap';
 import axios from 'axios'
 import Moment from 'react-moment';
 import { Link } from 'react-router-dom';
@@ -60,12 +61,9 @@ class PatientInfobyS extends Component {
   }
 
 
-  onchange= (event) => {
-    this.setState({remarque: event.target.value});
-    
-  }
  
-
+  
+ 
 
     render() {
         return (
@@ -73,6 +71,7 @@ class PatientInfobyS extends Component {
                 <div className='contact-list-container'>
 
                     <div className="animated fadeIn">
+                   
                         <Row>
                             <Col xs="12" sm="12" md="12">
                                 <Card>
@@ -135,10 +134,11 @@ class PatientInfobyS extends Component {
                                                             <i className="fa fa-refresh pr-3 "></i> <span >List</span></button>
                                                     </div>
                                                 </Link>
-                                                <div className=" d-flex justify-content-start pl-5 ">
-                                                <button type="button"  className="btn btn-info listinfo font-weight-bold w-25 btn-lg " onClick={this.toggleSuccess} >
-                                                <i className="fa fa-plus-square pr-3 "></i> <span >Ajouter</span></button>
-                                                </div>
+                                                
+                                               {/* <Link to={`/medecin/remarque/${item._id}`} > */}
+                                                {/* <button type="button"  className="btn btn-info listinfo font-weight-bold w-25 btn-lg " onClick={this.toggleSuccess} >
+                                                <i className="fa fa-plus-square pr-3 "></i> <span >Ajouter</span></button> */}
+                                                {/* </Link>  */}
                                                 
 
                                             </table>
@@ -150,32 +150,7 @@ class PatientInfobyS extends Component {
          
 
          
-          
-          <Modal isOpen={this.state.success} toggle={this.toggleSuccess}
-                 className={'modal-success ' + this.props.className}>
-            <ModalHeader toggle={this.toggleSuccess}>patient</ModalHeader>
-            <ModalBody>
-              
-
-            <FormGroup row>
-              <Col md="3">
-                <Label htmlFor="text-input">remarque</Label>
-              </Col>
-              <Col xs="12" md="9">
-                <Input   defaultValue={this.state.remarque}
-                    onChange={evenement=>this.setState({remarque:evenement.target.value})}
-                 type="textarea" id="text-input" name="text-input"/>
-
-              </Col>
-            </FormGroup>
-
-            </ModalBody>
-            <ModalFooter>
-              <Button color="success" onClick={this.toggleSuccess}>Ajouter</Button>{' '}
-              <Button color="secondary" onClick={this.toggleSuccess}>Cancel</Button>
-            </ModalFooter>
-          </Modal>
-
+         
         </CardBody>
    </Card>
 </Col>

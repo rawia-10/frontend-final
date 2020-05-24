@@ -37,7 +37,12 @@ class Forms extends Component {
       collapse: true,
       fadeIn: true,
       timeout: 300,
-
+      rdv:{
+        nom: "",
+        prenom: "",
+        email: "",
+        tel: "",
+       },
       to :'',
       subject : '',
       text : '',
@@ -52,12 +57,14 @@ class Forms extends Component {
   toggleFade() {
     this.setState((prevState) => { return { fadeIn: !prevState }});
   }
+
+
   handelSubmit(){
    
-     axios.post("http://localhost:5000/sendemail",{
+     axios.post("http://localhost:5000/email/send",{
   
       to : this.state.to ,
-      subjectject :this.state.subject,
+      subject :this.state.subject,
       text:this.state.text,
         })
         .then(res => {
@@ -66,7 +73,7 @@ class Forms extends Component {
               alert(" verifier votre adresse")
             }
             else {
-              alert("Done ! ");
+              alert("Email Envoyer ! ");
               window.location.href = "/#/home/listerendezvous"
             }
   
@@ -80,6 +87,16 @@ class Forms extends Component {
     {
         this.setState({to:"",subject:"",text:""})
     }
+
+
+    
+onChange= (event) => {
+  this.setState({to: event.target.value});
+  this.setState({subject: event.target.value});
+  this.setState({text: event.target.value});
+
+ 
+}
   render() {
     return (
       <div className="animated fadeIn">
@@ -98,24 +115,27 @@ class Forms extends Component {
                     <Col md="3">
                       <Label htmlFor="hf-email">to</Label>
                     </Col>
+
                     <Col xs="12" md="9">
                       <Input type="email" id="hf-email" name="hf-email" 
                       placeholder="" autoComplete="email"
-                      value={this.state.to} 
-                     onChange={evt => this.setState({to: evt.target.value})} />
+                      defaultValue={this.state.to}
+                      onChange={evenement=>this.setState({to:evenement.target.value})} />
                     </Col>
+
                   </FormGroup>
                   <FormGroup row>
                     <Col md="3">
                       <Label htmlFor="hf-password">subject</Label>
                     </Col>
                     <Col xs="12" md="9">
-                      <Input type="texte" id="hf-password" name="hf-password"
-                       placeholder="" autoComplete="current-password"
+                      <Input type="texte" placeholder="hello"
                        value={this.state.subject} 
                      onChange={evt => this.setState({subject: evt.target.value})}/>
                     </Col>
                   </FormGroup>
+
+
                   <FormGroup row>
                     <Col md="3">
                       <Label htmlFor="textarea-input">Text</Label>
@@ -129,6 +149,7 @@ class Forms extends Component {
                   </FormGroup>
                 </Form>
               </CardBody>
+            
               <CardFooter>
                 <Button type="submit" size="sm" color="primary" onClick={this.handelSubmit.bind(this)}><i className="fa fa-dot-circle-o"></i> Submit</Button>
                 <Button type="reset" size="sm" color="danger" onClick={this.reset.bind(this)}><i className="fa fa-ban"></i> Reset</Button>

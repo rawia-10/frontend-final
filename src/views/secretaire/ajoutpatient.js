@@ -60,14 +60,12 @@ class Forms extends Component {
   }
 
 
-  handleSubmit = () => {
 
 
-    let token = localStorage.getItem("token");
-    if (!token) {
-        token = "";
-    }
-    axios.post("http://localhost:5000/patient/addpatient", {
+handelSubmit()
+{
+  
+    axios.post("http://localhost:5000/patient/addpatient",{
       nom:this.state.nom,
       prenom:this.state.prenom,
       genre:this.state.genre,
@@ -76,20 +74,12 @@ class Forms extends Component {
       password:this.state.password,
       tel:this.state.tel,
       date_naissance:this.state.date_naissance
-
-    },
-
-  ).then(success => {
-      // if status 200 OK
-      if (typeof (success.data.error) != "undefined" && success.data.error !== "") {
-        ToastsStore.error(success.data.error)
-      } else if (typeof (success.data.message) != "undefined" && success.data.message !== "") {
-        ToastsStore.success(success.data.message)
-        this.props.history.push("/home/listepatient");
-      }
-    }).catch(err => {
-      ToastsStore.error("Server error")
+   
     })
+.then(res=>{
+  console.log("data",res.data);
+  window.location.href="/#/home/listepatient"
+})
 
 }
 
@@ -101,7 +91,7 @@ class Forms extends Component {
 
 
 
-onchange= (event) => {
+onChange= (event) => {
     this.setState({nom: event.target.value});
     this.setState({prenom: event.target.value});
     this.setState({address: event.target.value});
@@ -138,7 +128,7 @@ onchange= (event) => {
 
                   <FormGroup row>
                     <Col md="3">
-                      <Label htmlFor="text-input">prenom</Label>
+                      <Label htmlFor="text-input">prénom</Label>
                     </Col>
                     <Col xs="12" md="9">
                       <Input   defaultValue={this.state.prenom}
@@ -151,7 +141,7 @@ onchange= (event) => {
 
                   <FormGroup row>
                     <Col md="3">
-                      <Label htmlFor="text-input">address</Label>
+                      <Label htmlFor="text-input">adresse</Label>
                     </Col>
                     <Col xs="12" md="9">
                       <Input   defaultValue={this.state.address}
@@ -178,7 +168,7 @@ onchange= (event) => {
 
                   <FormGroup row>
                     <Col md="3">
-                      <Label htmlFor="password-input">Password</Label>
+                      <Label htmlFor="password-input">Mot de passe</Label>
                     </Col>
                     <Col xs="12" md="9">
                       <Input defaultValue={this.state.password}
@@ -211,7 +201,7 @@ onchange= (event) => {
 
               <FormGroup row>
                     <Col md="3">
-                      <Label htmlFor="tel-input">telephone</Label>
+                      <Label htmlFor="tel-input">Téléphone</Label>
                     </Col>
                     <Col xs="12" md="9">
                       <Input defaultValue={this.state.tel}
@@ -240,7 +230,7 @@ onchange= (event) => {
 </Form>
               </CardBody>
               <CardFooter>
-                <Button onClick={this.handleSubmit} type="submit" size="sm" color="primary"><i className="fa fa-dot-circle-o"></i> Envoyer</Button>
+                <Button onClick={this.handelSubmit.bind(this)} type="submit" size="sm" color="primary"><i className="fa fa-dot-circle-o"></i> Envoyer</Button>
                 <Button  onClick={this.reset} type="reset" size="sm" color="danger"><i className="fa fa-ban"></i> Annuler</Button>
               </CardFooter>
             </Card>

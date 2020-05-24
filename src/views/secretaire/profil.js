@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 
 
 
-class PatientInfobyS extends Component {
+class secretaireInfobyS extends Component {
     constructor(props) {
         super(props);
 
@@ -30,10 +30,10 @@ class PatientInfobyS extends Component {
         };
     }
 
-
-    
-getPatient(){
-    fetch(`http://localhost:5000/patient/getbyid/${this.props.match.params.id}`,
+ 
+   
+getSecretaire(){
+    fetch(`http://localhost:5000/secretaire/getbyid/${this.props.match.params.id}`,
     {method:"GET"})
       .then(response => response.json()) 
       .then(data => {
@@ -46,7 +46,7 @@ getPatient(){
 
 
 componentDidMount = () => {
-  this.getPatient();
+  this.getSecretaire();
 }
 
     render() {
@@ -59,7 +59,7 @@ componentDidMount = () => {
                             <Col xs="12" sm="12" md="12">
                                 <Card>
                                     <CardBody>
-                                        <h1 className="h1 text-center text-success font-weight-bold">Patient Info</h1>
+                                        <h1 className="h1 text-center text-success font-weight-bold">secretaire Info</h1>
                                         <hr></hr>
                                         <div className="table-responsive">
                                             <table className="table">
@@ -107,7 +107,7 @@ componentDidMount = () => {
                                                         </td>
                                                     </tr>
                                                 </tbody>
-                                                <Link   to='/home/listepatient'>
+                                                <Link   to='/home/listesecretaire'>
                                                     <div className=" d-flex justify-content-start pl-5 ">
                                                         <button type="button" name="" id="" className="btn btn-danger listinfo font-weight-bold w-25 btn-lg ">
                                                             <i className="fa fa-refresh pr-3 "></i> <span >List</span></button>
@@ -128,4 +128,4 @@ componentDidMount = () => {
         );
     }
 }
-export default PatientInfobyS;
+export default secretaireInfobyS;
