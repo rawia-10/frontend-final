@@ -116,66 +116,46 @@ handlechange=(e)=>{
         <div>
 
 
-<header className="main_menu home_menu">
-        <div className="container">
-          <div className="row align-items-center">
-            <div className="col-lg-12">
-              <nav className="navbar navbar-expand-lg navbar-light">
-                <a className="navbar-brand" > <img src="img/logo.png" alt="logo" /> </a>
-                <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                  <span className="navbar-toggler-icon" />
-                </button>
-                <div className="collapse navbar-collapse main-menu-item justify-content-center" id="navbarSupportedContent">
-                  <ul className="navbar-nav align-items-center">
-                    <li className="nav-item active">
-                    <Link to="login" className="nav-link">Accueil</Link>
-                    </li>
-                    <li className="nav-item">
-                    <Link to="login" className="nav-link">A Propos</Link>
-                    </li>
-
-                  
-
-                    <li className="nav-item">
-                    <Link to="login" className="nav-link">Contact</Link>
-                    </li>
-                 
-
- <li className="nav-item dropdown">
- <span className="nav-link">Connexion</span> 
-<div className="dropdown-menu" aria-labelledby="navbarDropdown">
-<Link to="loginpatient" >
-              <a className="btn_2 d-none d-lg-block" href="#">Patient</a>
+      {/* Header Area Starts */}
+      <header className="header-area">
+        <div id="header">
+          <div className="container">
+            <div className="row align-items-center justify-content-between d-flex">
+              <div id="logo">
+                <a href="index.html"><img src="assets/images/logo/logo.png" alt="" title /></a>
+              </div>
+              <nav id="nav-menu-container">
+                <ul className="nav-menu">
+                <li className="menu-active"><Link to="login">Accueil</Link></li>
+                  <li><Link to="login">A Propos</Link></li>
+                  <li><Link to="login">Contact</Link></li>
+                  <li className="nav-item dropdown">
+                   <a className="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                 Connexion
+                  </a>
+                  <div className="dropdown-menu" aria-labelledby="navbarDropdown">
+                <Link to="loginpatient" >
+               <a className="dropdown-item" >Patient</a>
+                </Link>
+                 <Link to="loginsecretaire" >
+               <a className="dropdown-item">Secrétaire</a>
+                 </Link> 
+               <Link to="loginmedecin" >
+                 <a className="dropdown-item">Medecin</a>
               </Link>
-              <div>
-              <Link to="loginsecretaire" >
-              <a className="btn_2 d-none d-lg-block" href="#">Secretaire</a>
-              </Link> </div>
-              <Link to="loginmedecin" >
-              <a className="btn_2 d-none d-lg-block" href="#">Medecin</a>
-              </Link>
- 
-</div>
-</li>
-
-                 
-                 
-                 
-                  </ul>
-
-  
-                </div>
-               
-              </nav>
+            </div>
+            </li>
+                  	          				          
+                </ul>
+              </nav>{/* #nav-menu-container */}		    		
             </div>
           </div>
         </div>
       </header>
-      <section className="banner_partee">
-     </section>
+      {/* Header Area End */}
 
 
-      <section>
+      <section className="banner-areaa">
 
 
 
@@ -183,9 +163,7 @@ handlechange=(e)=>{
       <Row>
  <Col>
    <Card>
-     <CardHeader>
-       <i className="icon-list"></i> Liste des medecins
-     </CardHeader>
+     
      <CardBody>
      <div class="search">
                       <input type="text" class="searchTerm" placeholder="Que cherchez-vous?" onChange={this.handlechange}/>
@@ -212,11 +190,9 @@ handlechange=(e)=>{
          <td>{item.nom} {item.prenom}</td>
          <td>{item.address}</td>
        <td>{item.specialite}</td>
-         {/*fas en gras fa simple*/}
+
         <td>
-        {/* <i class='fa fa-edit fa-lg mt-4' style={{color:"green"}} onClick = {evt => this.handleClickEdit(evt,item._id)}></i>
-        <i class='fa fa-trash fa-lg mt-4' style={{color:"red"}}
-          onClick = {evt => this.handleClickDelete(evt,item._id)}></i> */}
+   
             <Link to={`/infomedecin/${item._id}`}>
       
             <button type="button" className="btn btn-info font-weight-bold  ">Prendre rendez-vous</button>
@@ -232,13 +208,89 @@ handlechange=(e)=>{
          </tbody>
        </Table>
 
+       <nav>
+   
+   <Pagination>
+    
+    <PaginationItem>
+      { prev === 0 ? <PaginationLink disabled>First</PaginationLink> :
+        <PaginationLink onClick={this.handleFirstClick} id={prev} href={prev}>First</PaginationLink>
+    }
+    </PaginationItem>
+    <PaginationItem>
+      { prev === 0 ? <PaginationLink disabled>Prev</PaginationLink> :
+        <PaginationLink onClick={this.handleClick} id={prev} href={prev}>Prev</PaginationLink>
+    }
+    </PaginationItem>
+      {
+        pageNumbers.map((number,i) =>
+          <Pagination key= {i}>
+            <PaginationItem active = {pageNumbers[currentPage-1] === (number) ? true : false} >
+              <PaginationLink onClick={this.handleClick} href={number} key={number} id={number}>
+                {number}
+              </PaginationLink>
+            </PaginationItem>
+          </Pagination>
+        )}
+  
+      <PaginationItem>
+        {
+          currentPage === last ? <PaginationLink disabled>Next</PaginationLink> :
+            <PaginationLink onClick={this.handleClick} id={pageNumbers[currentPage]} href={pageNumbers[currentPage]}>Next</PaginationLink>
+        }
+      </PaginationItem>
+  
+      <PaginationItem>
+      {
+        currentPage === last ? <PaginationLink disabled>Last</PaginationLink> :
+        <PaginationLink onClick={this.handleLastClick} id={pageNumbers[currentPage]} href={pageNumbers[currentPage]}>Last</PaginationLink>
+    }
+    </PaginationItem>
+    </Pagination>
+    </nav>
+             
+                 
+              
+
      </CardBody>
    </Card>
  </Col>
 </Row>
   </section>
 
-
+ {/* footer */}
+ <footer className="hotline-area text-center section-padding">
+      <div className="container">
+      <div className="row">
+     
+      <div className="col-xl-5 col-lg-3">
+        <div className="appointment-form text-center mt-5 mt-lg-0">
+          <h3 className="mb-5">Contacter nous</h3>
+          <form action="#">
+            <div className="form-group">
+              <input type="text" placeholder="Your Name" onfocus="this.placeholder = ''" onblur="this.placeholder = 'nom'" required />
+            </div>
+            <div className="form-group">
+              <input type="email" placeholder="Your Email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email'" required /> 
+            </div>
+            <div className="form-group">
+              <textarea name="message" cols={20} rows={7} placeholder="Message" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Message'" required defaultValue={""} />
+            </div>
+            <a href="#" className="template-btn">Envoyer</a>
+          </form>
+        </div>
+      </div> 
+    
+     <div className="col-xl-5 col-lg-3">
+           
+              <h2>Emergency hotline</h2>
+              <span>(+01) – 256 567 550</span>
+              {/* <p className="pt-3">We provide 24/7 customer support. Please feel free to contact us <br />for emergency case.</p> */}
+            </div>
+          </div>
+        </div>
+      </footer>
+      {/* footer end */}
 
 
 

@@ -57,8 +57,11 @@ const updatePa = React.lazy(() => import('./views/medecin/UpdatePatient'));
 const listeS = React.lazy(() => import('./views/admin/secretaire'));
 const listeM = React.lazy(() => import('./views/admin/medecin'));
 // const AdminLogin = React.lazy(() => import('./views/Pages/Login/loginA'));
-const Medecininfo = React.lazy(() => import('./views/admin/medecinnfo'));
+const Medecininfo = React.lazy(() => import('./views/admin/medecininfo'));
 const Secretaireinfo = React.lazy(() => import('./views/admin/secretaireinfo'));
+const addsecretaire = React.lazy(() => import('./views/admin/ajoutsecretaire'));
+const addmedecin = React.lazy(() => import('./views/admin/ajoutmedecin'));
+
 
 
 //patient
@@ -124,9 +127,11 @@ const routes = [
   //admin
   // { path: '/admin/login',  exact: true, name: 'admin_login', component: AdminLogin },
   { path: '/admin/listesecretaire', exact: true, name: 'liste secretaire', component: listeS },
-  { path: '/admin/listemedecin', exact: true, name: 'liste medecin', component: listeM},
-  { path: '/admin/medecininfo/:id', exact: true, name: 'liste medecin', component: Medecininfo},
-  { path: '/admin/secretaireinfo/:id', exact: true, name: 'listesecretaire', component: Secretaireinfo},
+  { path: '/admin/listemedecin', exact: true, name: 'liste medecin', component: listeM },
+  { path: '/admin/secretaireinfo/:id', exact: true, name: ' secretaire', component: Secretaireinfo },
+  { path: '/admin/medecininfo/:id', exact: true, name: ' medecin', component: Medecininfo},
+  { path: '/admin/ajoutsecretaire', exact: true, name: 'ajout  secretaire', component: addsecretaire},
+  { path: '/admin/ajoutmedecin', exact: true, name: 'ajout  medecin', component: addmedecin},
  
 
   //patient

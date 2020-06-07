@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 
 
 
-class MedecinInfobyS extends Component {
+class PatientInfobyS extends Component {
     constructor(props) {
         super(props);
 
@@ -22,46 +22,32 @@ class MedecinInfobyS extends Component {
             date_naissance:"",
             email:"",
             tel:"",
-            remarque:"",
+           
             password:"",
-            specialite:"",
-            fix:"",
+          
             CreatedAt: "",
             UpdatedAt: ""
         };
     }
 
-    getMedecin = () => {
 
-      axios.get(`http://127.0.0.1:8000/medecin/get/${this.props.match.params.id}`,
-          {
-              headers: {
-                  Authorization: 'Bearer ' + localStorage.getItem("token")
-              }
-          })
-
-          .then((u) => {
-              this.setState({
-                nom: u.data.data.data.nom,
-                prenom: u.data.data.data.prenom,
-                address: u.data.data.data.address,
-                  email: u.data.data.data.email,
-                  specialite: u.data.data.data.specialite,
-                  fix: u.data.data.data.fix,
-                  tel: u.data.data.data.tel,
-                  genre: u.data.data.data.genre,
-                  date_naissance: u.data.data.data.date_naissance,
-              
-                  CreatedAt: u.data.data.data.CreatedAt,
-                  UpdatedAt: u.data.data.data.UpdatedAt
-              });
-          })
-          .catch((err) => alert(err))
+    
+getPatient(){
+    fetch(`http://localhost:5000/patient/getbyid/${this.props.match.params.id}`,
+    {method:"GET"})
+      .then(response => response.json()) 
+      .then(data => {
+        console.log("GETONE", data);
+   
+        
+        this.setState(data)           
+    })
   }
 
-  componentDidMount = () => {
-      this.getMedecin();
-  }
+
+componentDidMount = () => {
+  this.getPatient();
+}
 
     render() {
         return (
@@ -73,7 +59,7 @@ class MedecinInfobyS extends Component {
                             <Col xs="12" sm="12" md="12">
                                 <Card>
                                     <CardBody>
-                                        <h1 className="h1 text-center text-success font-weight-bold">Medecin Info</h1>
+                                        <h1 className="h1 text-center text-success font-weight-bold">Patient Info</h1>
                                         <hr></hr>
                                         <div className="table-responsive">
                                             <table className="table">
@@ -103,18 +89,11 @@ class MedecinInfobyS extends Component {
                                                         <td>{this.state.genre}</td>
                                                     </tr>
                                                     <tr>
-                                                        <td className="font-weight-bold">date_naissance</td>
+                                                        <td className="font-weight-bold">date naissance</td>
                                                         <td>{this.state.date_naissance}</td>
                                                     </tr>
 
-                                                    <tr>
-                                                        <td className="font-weight-bold">specialite</td>
-                                                        <td>{this.state.specialite}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td className="font-weight-bold">Telephone fix</td>
-                                                        <td>{this.state.fix}</td>
-                                                    </tr>
+                                                  
                                                     <tr>
                                                         <td className="font-weight-bold">Created at</td>
                                                         <td>
@@ -128,7 +107,7 @@ class MedecinInfobyS extends Component {
                                                         </td>
                                                     </tr>
                                                 </tbody>
-                                                <Link   to='/admin/listemedecin'>
+                                                <Link   to='/home/listepatient'>
                                                     <div className=" d-flex justify-content-start pl-5 ">
                                                         <button type="button" name="" id="" className="btn btn-danger listinfo font-weight-bold w-25 btn-lg ">
                                                             <i className="fa fa-refresh pr-3 "></i> <span >List</span></button>
@@ -149,4 +128,4 @@ class MedecinInfobyS extends Component {
         );
     }
 }
-export default MedecinInfobyS;
+export default PatientInfobyS;

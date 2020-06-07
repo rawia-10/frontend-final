@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { Badge, Card, CardBody, CardHeader,Button, Col, Pagination, PaginationItem, PaginationLink, Row, Table } from 'reactstrap';
-
-import {Link} from 'react-router-dom'
+import SearchField from 'react-search-field';
+import { Badge, Card,Form, CardBody,Button, CardHeader, Col, Pagination, PaginationItem, PaginationLink, Row, Table } 
+from 'reactstrap';
+import { Link } from 'react-router-dom';
 
 let prev  = 0;
 let next  = 0;
@@ -159,8 +160,9 @@ next = (last === currentPage) ? currentPage : currentPage + 1;
                   </tr>
                   </thead>
                   <tbody>{
-                   currentTodos.filter(item =>item.nom.toUpperCase().includes(this.state.keyword.toUpperCase().trim())).map((item,index)=>{
-                   return(
+                  //  currentTodos.filter(item =>item.nom.toUpperCase().includes(this.state.keyword.toUpperCase().trim())).map((item,index)=>{
+                    currentTodos.map((item,index) =>{
+                  return(
                    <tr key={index}>
                    <td>{item.nom} </td>
                    <td>{item.prenom}</td>
@@ -171,10 +173,6 @@ next = (last === currentPage) ? currentPage : currentPage + 1;
                    <td>{item.tel}</td>
                    <td>
                   <div>
-  {/* <link to="{`/secretaire/info/${item._id}`}" />    
-  <button color="info">Info</button> 
-  <button color="success" onclick="{evt=">this.handleClickEdit(evt,item._id){'}'}&gt;Modifier</button>
-  <button color="danger" onclick="{evt=">this.handleClickDelete(evt,item._id){'}'}&gt;Supprimer</button> */}
 
 
   <Link to={`/secretaire/info/${item._id}`}  className="view" title="view" data-toggle="tooltip">    <i className="fa fa-eye" style={{fontSize: '24px'}} /></Link>

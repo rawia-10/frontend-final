@@ -24,7 +24,7 @@ import Charts from './Charts';
 import Dashboard from './Dashboard';
 import { CoreUIIcons, Flags, FontAwesome, SimpleLineIcons } from './Icons';
 import { Alerts, Badges, Modals } from './Notifications';
-import { Login, Page404, LoginAdmin, Register,LoginS,LoginM ,LoginP ,Patient,medecin,Info,Medecininfo} from './Pages';
+import { Login, Page404, LoginAdmin, Register,LoginS,LoginM ,LoginP ,Patient,medecin,Info,Medecininfo,Reset,Rdv} from './Pages';
 import { Colors, Typography } from './Theme';
 import Widgets from './Widgets';
 
@@ -42,7 +42,9 @@ export {
   LoginM,
 LoginP,
 Patient,
+Reset,
 Info,
+Rdv,
 Medecininfo,
 
   Modals,

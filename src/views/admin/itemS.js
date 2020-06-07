@@ -50,7 +50,7 @@ class Itemsecretaire extends Component {
                             <i className="fa fa-info-circle t-green fa-lg" onClick={this.getMedecin}></i>
                         </div>
                         </Link> */}
-                        <Link to={`/admin/secretaireinfo/${item.Id}`}>
+                        <Link to={`/admin/secretaireinfo/${item.id}`}>
                         <div name="col-xs-4 col-md-3 d-flex justify-content-start">
                     <button type="button" name="" id="" className="btn btn-info font-weight-bold "  >
                     <i className="fa fa-info pr-2"></i> info</button>

@@ -133,6 +133,12 @@ remove(id)
        
              
       <div className="animated fadeIn">
+         <Row> 
+          <Col xs="12" lg="6"><img src="/img/rdv.png" style={{height: '70px', width:'70px'}} /> Rendez vous</Col>
+          <Col  xs="12" lg="6">
+     <Link to="/home/ajoutpatient">     <Button color="info">Ajouter rendez-vous</Button></Link>
+     </Col>
+        </Row>
         <Row>
 
          

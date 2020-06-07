@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 
 
 
-class PatientInfobyS extends Component {
+class MedecinInfobyS extends Component {
     constructor(props) {
         super(props);
 
@@ -24,41 +24,29 @@ class PatientInfobyS extends Component {
             tel:"",
             remarque:"",
             password:"",
+            specialite:"",
+            fix:"",
             CreatedAt: "",
             UpdatedAt: ""
         };
     }
 
-    getPatient = () => {
-
-      axios.get(`http://127.0.0.1:8000/patient/get/${this.props.match.params.id}`,
-          {
-              headers: {
-                  Authorization: 'Bearer ' + localStorage.getItem("token")
-              }
-          })
-          
-          .then((u) => {
-              this.setState({
-                nom: u.data.data.data.nom,
-                prenom: u.data.data.data.prenom,
-                address: u.data.data.data.address,
-                  email: u.data.data.data.email,
-
-                  tel: u.data.data.data.tel,
-                  genre: u.data.data.data.genre,
-                  date_naissance: u.data.data.data.date_naissance,
-                  remarque: u.data.data.data.remarque,
-                  CreatedAt: u.data.data.data.CreatedAt,
-                  UpdatedAt: u.data.data.data.UpdatedAt
-              });
-          })
-          .catch((err) => alert(err))
-  }
-
-  componentDidMount = () => {
-      this.getPatient();
-  }
+    getMedecin(){
+        fetch(`http://localhost:5000/medecin/getbyid/${this.props.match.params.id}`,
+        {method:"GET"})
+          .then(response => response.json()) 
+          .then(data => {
+            console.log("GETONE", data);
+       
+            
+            this.setState(data)           
+        })
+      }
+    
+    
+    componentDidMount = () => {
+      this.getMedecin();
+    }
 
     render() {
         return (
@@ -70,7 +58,7 @@ class PatientInfobyS extends Component {
                             <Col xs="12" sm="12" md="12">
                                 <Card>
                                     <CardBody>
-                                        <h1 className="h1 text-center text-success font-weight-bold">Patient Info</h1>
+                                        <h1 className="h1 text-center text-success font-weight-bold">Medecin Info</h1>
                                         <hr></hr>
                                         <div className="table-responsive">
                                             <table className="table">
@@ -105,10 +93,13 @@ class PatientInfobyS extends Component {
                                                     </tr>
 
                                                     <tr>
-                                                        <td className="font-weight-bold">Remarque</td>
-                                                        <td>{this.state.remarque}</td>
+                                                        <td className="font-weight-bold">specialite</td>
+                                                        <td>{this.state.specialite}</td>
                                                     </tr>
-
+                                                    <tr>
+                                                        <td className="font-weight-bold">Telephone fix</td>
+                                                        <td>{this.state.fix}</td>
+                                                    </tr>
                                                     <tr>
                                                         <td className="font-weight-bold">Created at</td>
                                                         <td>
@@ -122,10 +113,10 @@ class PatientInfobyS extends Component {
                                                         </td>
                                                     </tr>
                                                 </tbody>
-                                                <Link   to='login'>
+                                                <Link   to='/admin/listemedecin'>
                                                     <div className=" d-flex justify-content-start pl-5 ">
                                                         <button type="button" name="" id="" className="btn btn-danger listinfo font-weight-bold w-25 btn-lg ">
-                                                            <i className="fa fa-refresh pr-3 "></i> <span >Accueil</span></button>
+                                                            <i className="fa fa-refresh pr-3 "></i> <span >List</span></button>
                                                     </div>
                                                 </Link>
                                             </table>
@@ -143,4 +134,4 @@ class PatientInfobyS extends Component {
         );
     }
 }
-export default PatientInfobyS;
+export default MedecinInfobyS;

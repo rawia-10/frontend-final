@@ -17,11 +17,11 @@ export default {
           url: '/admin/listemedecin',
           icon: 'icon-cursor',
         },
-        // {
-        //   name: 'Ajout medecin',
-        //   url: '/home/ajoutmedecin',
-        //   icon: 'icon-puzzle',
-        // },
+        {
+          name: 'Ajout medecin',
+          url: '/admin/ajoutmedecin',
+          icon: 'icon-cursor',
+        },
       
       ],
     },
@@ -37,11 +37,11 @@ export default {
           url: '/admin/listesecretaire',
           icon: 'icon-cursor',
         },
-        // {
-        //   name: 'Ajout secrétaire',
-        //   url: '/home/ajoutsecrétaire',
-        //   icon: 'icon-puzzle',
-        // },
+        {
+          name: 'Ajout secrétaire',
+          url: '/admin/ajoutsecretaire',
+          icon: 'icon-cursor',
+        },
       
       ],
     },

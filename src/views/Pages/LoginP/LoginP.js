@@ -56,7 +56,7 @@ Login=()=> {
 
             if (res.data.data.user.role.nom=== 'patient' ) {
               localStorage.setItem('role', res.data.data.user.role.nom);
-              this.props.history.push('/Info'); //redirection mrigla zeda
+              this.props.history.push('/login'); //redirection mrigla zeda
             }
       }
 
@@ -132,70 +132,48 @@ validate = () => {
       <div>
              <ToastsContainer store={ToastsStore} />
 
-             <header className="main_menu home_menu">
-        <div className="container">
-          <div className="row align-items-center">
-            <div className="col-lg-12">
-              <nav className="navbar navbar-expand-lg navbar-light">
-                <a className="navbar-brand" > <img src="img/logo.png" alt="logo" /> </a>
-                <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                  <span className="navbar-toggler-icon" />
-                </button>
-                <div className="collapse navbar-collapse main-menu-item justify-content-center" id="navbarSupportedContent">
-                  <ul className="navbar-nav align-items-center">
-                    <li className="nav-item active">
-                    <Link to="login" className="nav-link">Accueil</Link>
-                    </li>
-                    <li className="nav-item">
-                    <Link to="login" className="nav-link">A Propos</Link>
-                    </li>
-
-                  
-
-                    <li className="nav-item">
-                    <Link to="login" className="nav-link">Contact</Link>
-                    </li>
-                 
-               
-                    <li className="nav-item dropdown">
-  <a className="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-   Connexion
-  </a>
-  <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-    
-  <Link to="loginpatient" >
-  <a className="dropdown-item" >Patient</a>
-  </Link>
-  <Link to="loginsecretaire" >
-    <a className="dropdown-item">Secretaire</a>
-  </Link> 
-  <Link to="loginmedecin" >
-  <a className="dropdown-item">Medecin</a>
- </Link>
-
-  </div>
-</li>
-           
-                 
-                 
-                  </ul>
-
-  
-                </div>
-               
-              </nav>
+{/* Header Area Starts */}
+<header className="header-area">
+        <div id="header">
+          <div className="container">
+            <div className="row align-items-center justify-content-between d-flex">
+              <div id="logo">
+                <a href="index.html"><img src="assets/images/logo/logo.png" alt="" title /></a>
+              </div>
+              <nav id="nav-menu-container">
+                <ul className="nav-menu">
+                <li className="menu-active"><Link to="login">Accueil</Link></li>
+                  <li><Link to="login">A Propos</Link></li>
+                  <li><Link to="login">Contact</Link></li>
+                  <li className="nav-item dropdown">
+                   <a className="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                 Connexion
+                  </a>
+                  <div className="dropdown-menu" aria-labelledby="navbarDropdown">
+                <Link to="loginpatient" >
+               <a className="dropdown-item" >Patient</a>
+                </Link>
+                 <Link to="loginsecretaire" >
+               <a className="dropdown-item">Secrétaire</a>
+                 </Link> 
+               <Link to="loginmedecin" >
+                 <a className="dropdown-item">Medecin</a>
+              </Link>
+            </div>
+            </li>
+                  	          				          
+                </ul>
+              </nav>{/* #nav-menu-container */}		    		
             </div>
           </div>
         </div>
       </header>
-
- <section className="banner_partee">
-     </section>
+      {/* Header Area End */}
 
 
 
         {/* Sing in  Form */}
-        <section className="sign-in">
+        <section className="banner-areaa">
           <div className="containere">
             <div className="signin-content ">
               <div className="signin-image col-lg-5">
@@ -263,7 +241,7 @@ validate = () => {
               
                 </Row>
                 <br></br>
-                <a href="" className=" s px-1"><span>mot de passe oublié </span></a>
+                <Link to="/reset" className=" s px-1"><span>mot de passe oublié </span></Link>
                 <Link to="registerP" className="fr">
                 <span className="d-flex align-item-center justify-content-center p-4 notreg "> Créer un compte</span>
 
@@ -282,57 +260,40 @@ validate = () => {
           </div>
         </section>
       
-      
-        <section className="banner_partee">
-     </section>
-        <footer className="footer-area">
-  <div className="footer section_padding">
-    <div className="container">
-      <div className="row justify-content-between">
-        <div className="col-xl-2 col-md-4 col-sm-6 single-footer-widget">
-          <a href="#" className="footer_logo"> <img src="img/logo.png" alt="#" className="imgf"/> </a>
+     
+  {/* footer */}
+  <footer className="hotline-area text-center section-padding">
+      <div className="container">
+      <div className="row">
+     
+      <div className="col-xl-5 col-lg-3">
+        <div className="appointment-form text-center mt-5 mt-lg-0">
+          <h3 className="mb-5">Contacter nous</h3>
+          <form action="#">
+            <div className="form-group">
+              <input type="text" placeholder="Your Name" onfocus="this.placeholder = ''" onblur="this.placeholder = 'nom'" required />
+            </div>
+            <div className="form-group">
+              <input type="email" placeholder="Your Email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email'" required /> 
+            </div>
+            <div className="form-group">
+              <textarea name="message" cols={20} rows={7} placeholder="Message" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Message'" required defaultValue={""} />
+            </div>
+            <a href="#" className="template-btn">Envoyer</a>
+          </form>
         </div>
-        <div className="col-xl-2 col-sm-6 col-md-4 single-footer-widget">
-          <h4>Liens rapides</h4>
-          <ul>
-            <li><a href="#">Accueil</a></li>
-            <li><a href="#">A propos</a></li>
-
-            <li><a href="#">Connexion</a></li>
-          
-          </ul>
+      </div> 
+    
+     <div className="col-xl-5 col-lg-3">
+           
+              <h2>Emergency hotline</h2>
+              <span>(+01) – 256 567 550</span>
+              {/* <p className="pt-3">We provide 24/7 customer support. Please feel free to contact us <br />for emergency case.</p> */}
+            </div>
+          </div>
         </div>
-        <div className="col-xl-6 col-sm-6 col-md-6 single-footer-widget">
-        <div className="regervation_part_iner">
-        <form>
-                  <h2>Envoyer Email</h2>
-                  <div className="form-row">
-                    <div className="form-group col-md-6">
-                      <input type="email" className="form-control" id="inputEmail4" placeholder="Nom" />
-                    </div>
-                    <div className="form-group col-md-6">
-                      <input type="password" className="form-control" id="inputPassword4" placeholder="Email " />
-                    </div>
-                    
-                
-                    <div className="form-group col-md-12">
-                      <textarea className="form-control" id="Textarea" rows={4} placeholder="Message " defaultValue={""} />
-                    </div>
-                  </div>
-                  <div className="regerv_btn">
-                    <a href="#" className="btn_2">Envoyer</a>
-                  </div>
-                </form>
-                </div>
-              
-        </div>
-        
-      </div>
-    </div>
-  </div>
-  
-</footer>
-
+      </footer>
+      {/* footer end */}
 
 
 
