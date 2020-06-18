@@ -175,7 +175,7 @@ class Register extends Component {
                     <Input type="select" nom="ccmonth" id="ccmonth"
                       value={this.state.idMed}
                            onChange={evt=>this.setState({idMed:evt.target.value})}>
-                      {<option value={"0"}> Choisir Medecin </option>}
+                      {<option value={"0"}> Choisir Médecin </option>}
                       {
                         this.state.medecin.map((item) =>
                           <option value={item._id}>{item.nom}</option>
@@ -203,7 +203,7 @@ class Register extends Component {
                   </InputGroupText>
                 </InputGroupAddon>
                     <Input defaultValue={this.state.prenom} required
-                      onChange={evenement=>this.setState({prenom:evenement.target.value})} type="text" name="prenom" id="prenom" placeholder="prenom" />
+                      onChange={evenement=>this.setState({prenom:evenement.target.value})} type="text" name="prenom" id="prénom" placeholder="prénom" />
                   </InputGroup>
 
                   <InputGroup className="mb-3">

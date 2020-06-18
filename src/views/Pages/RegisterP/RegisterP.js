@@ -134,7 +134,7 @@ onchange= (event) => {
 
                 <Form method="" className="f" >
 
-                <InputGroup className="mb-3">
+                <InputGroup >
                   <InputGroupAddon addonType="prepend">
                   <InputGroupText>
                     <i className="icon-user"></i>

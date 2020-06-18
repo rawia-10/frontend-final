@@ -185,12 +185,12 @@ handleFirstClick(event) {
          <thead>
          <tr>
          <th>name</th>
-                    <th>prenom</th>
+                    <th>prénom</th>
                     <th>date naissance</th>
                     <th>genre</th>
                     <th>email</th>
                     <th>adresse</th>
-                    <th>Télephone</th>
+                    <th>Téléphone</th>
                     <th>Actions</th>
          </tr>
          </thead>

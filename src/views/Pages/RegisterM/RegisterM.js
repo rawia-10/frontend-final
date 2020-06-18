@@ -46,9 +46,13 @@ class Forms extends Component {
       date_naissance:"",
       email:"",
       tel:"",
+      fix:"",
       password:"",
       idsousCat:"",
       err:"",
+      assurance_maladie:"",
+      specialite:"",
+      diplome:""
 
 
     };
@@ -77,8 +81,14 @@ class Forms extends Component {
   formdata.append("genre",this.state.genre);
   formdata.append("date naissance",this.state.date_naissance);
   formdata.append("téléphone",this.state.tel);
-  
-  console.log("state",this.state.nom, this.state.prenom);
+  formdata.append("Fix",this.state.fix);
+  formdata.append("assurance maladie",this.state.assurance_maladie);
+  formdata.append("specialite",this.state.specialite);
+  formdata.append("diplome",this.state.diplome);
+  // this.state.prenom, this.state.email, this.state.password
+  // , this.state.image, this.state.address, this.state.genre, this.state.date_naissance
+  // , this.state.tel, this.state.fix, this.state, this.state.assurance_maladie, this.state.specialite
+  console.log("state",this.state.address);
   await axios.post("http://localhost:5000/medecin/addmedecin",formdata)
     .then (res=> {
       console.log ("data",res.data);
@@ -103,6 +113,10 @@ this.setState({file:file})
     this.setState({address: event.target.value});
     this.setState({date_naissance: event.target.value});
     this.setState({genre: event.target.value});
+    this.setState({fix: event.target.value});
+    this.setState({assurance_maladie: event.target.value});
+    this.setState({specialite: event.target.value});
+    this.setState({diplome: event.target.value});
   }
 
 
@@ -159,10 +173,10 @@ this.setState({file:file})
 
               
                   <FormGroup row>
-                    <Col md="3">
+                    <Col >
                       <Label htmlFor="text-input">Nom</Label>
                     </Col>
-                    <Col xs="12" md="9">
+                    <Col xs="6" md="9">
                       <Input
                      value={this.state.nom} 
                      onChange={evt=>this.setState({nom:evt.target.value})}
@@ -172,10 +186,10 @@ this.setState({file:file})
                   </FormGroup>
                 
                   <FormGroup row>
-                    <Col md="3">
+                    <Col >
                       <Label htmlFor="textarea-input">prénom</Label>
                     </Col>
-                    <Col xs="12" md="9">
+                    <Col xs="6" md="9">
                       <Input
                         value={this.state.prenom} 
                         onChange={evt=>this.setState({prenom:evt.target.value})} type="text" nom="text-input2" id="text-inputt" rows="9"
@@ -184,10 +198,10 @@ this.setState({file:file})
                   </FormGroup>
                 
                   <FormGroup row>
-                    <Col md="3">
+                    <Col >
                       <Label htmlFor="text-input">email</Label>
                     </Col>
-                    <Col xs="12" md="9">
+                    <Col xs="6" md="9">
                       <Input
                         value={this.state.email} 
                         onChange={evt=>this.setState({email:evt.target.value})}
@@ -195,12 +209,34 @@ this.setState({file:file})
                 
                     </Col>
                   </FormGroup>
-                
                   <FormGroup row>
-                    <Col md="3">
-                      <Label htmlFor="text-input">mot de passe</Label>
-                    </Col>
-                    <Col xs="12" md="9">
+                
+                <Col >
+                    <Label htmlFor="text-input">assurance maladie</Label>
+                  </Col>
+                  <Col xs="6" md="9">
+
+                  
+                 <select className="select-css" name="select" id="select" required placeholder="specialite"  
+                defaultValue={this.state.specialite}
+                  onChange={evenement=>this.setState({specialite:evenement.target.value})}>
+                  <option value={"0"}>  specialite </option>
+                          <option > Dentiste</option>
+                           <option> Cardiologue  </option>     
+                           <option> Dermatologue  </option>   
+                           <option>  Généraliste </option>      
+                           <option>   </option>   
+                           <option>   </option>   
+                           <option>   </option>   
+                           <option>   </option>   
+                 </select> 
+                 </Col>
+                </FormGroup>               
+                  <FormGroup row>
+                    <Col>
+                      <Label>mot de passe</Label>
+                      </Col>
+                    <Col xs="6" md="9">
                       <Input
                         value={this.state.password} 
                         onChange={evt=>this.setState({password:evt.target.value})}
@@ -208,12 +244,12 @@ this.setState({file:file})
                 
                     </Col>
                   </FormGroup>
-                   
+                  
                   <FormGroup row>
-                    <Col md="3">
-                      <Label htmlFor="text-input">Confirmer mot de passe</Label>
-                    </Col>
-                    <Col xs="12" md="9">
+                    <Col>
+                      <Label > mot de passe</Label>
+                      </Col>
+                    <Col xs="9" md="9">
                       <Input
                         value={this.state.password} 
                         onChange={evt=>this.setState({password:evt.target.value})}
@@ -226,10 +262,10 @@ this.setState({file:file})
 
 
                   <FormGroup row>
-                    <Col md="3">
+                    <Col>
                       <Label htmlFor="text-input">date naissance</Label>
                     </Col>
-                    <Col xs="12" md="9">
+                    <Col xs="6" md="9">
                       <Input
                      value={this.state.date_naissance} 
                      onChange={evt=>this.setState({date_naissance:evt.target.value})}
@@ -239,25 +275,57 @@ this.setState({file:file})
                   </FormGroup>
                 
                   <FormGroup row>
-                    <Col md="3">
+                    <Col >
                       <Label htmlFor="textarea-input">téléphone</Label>
                     </Col>
-                    <Col xs="12" md="9">
+                    <Col xs="6" md="9">
                       <Input
                         value={this.state.tel} 
                         onChange={evt=>this.setState({tel:evt.target.value})} type="Number" nom="text-input55" id="text-input" rows="9"
                              placeholder="téléphone" />
                     </Col>
                   </FormGroup>
-                
+
+                          <FormGroup row>
+                    <Col >
+                      <Label htmlFor="textarea-input">Fix</Label>
+                    </Col>
+                    <Col xs="6" md="9">
+                      <Input
+                        value={this.state.fix} 
+                        onChange={evt=>this.setState({fix:evt.target.value})} type="Number" nom="text-input55" id="text-input" rows="9"
+                             placeholder="Fix" />
+                    </Col>
+                  </FormGroup>
+
+
                   <FormGroup row>
-                    <Col md="3">
+                
+                <Col >
+                    <Label htmlFor="text-input">assurance maladie</Label>
+                  </Col>
+                  <Col xs="6" md="9">
+
+                  
+                 <select className="select-css" name="select" id="select" required placeholder="assurance maladie"  
+                defaultValue={this.state.assurance_maladie}
+                  onChange={evenement=>this.setState({assurance_maladie:evenement.target.value})}>
+                  {/* <option value={"0"}> Choisir votre genre </option>*/}
+                          <option value="Oui"> Oui</option>
+                           <option value="Nom">  Non </option>        
+                 </select> 
+                 </Col>
+                </FormGroup>
+
+
+                  <FormGroup row>
+                    <Col >
                       <Label htmlFor="text-input">adresse</Label>
                     </Col>
-                    <Col xs="12" md="9">
+                    <Col xs="6" md="9">
                       <Input
-                        value={this.state.address} 
-                        onChange={evt=>this.setState({address:evt.target.value})}
+                        defaultValue={this.state.address}
+                        onChange={evenement=>this.setState({address:evenement.target.value})}
                       type="email" id="text-input" nom="text-input33" placeholder="adresse" />
                 
                     </Col>
@@ -268,10 +336,10 @@ this.setState({file:file})
                  
                   <FormGroup row>
                 
-                  <Col md="3">
+                  <Col >
                       <Label htmlFor="text-input">Genre</Label>
                     </Col>
-                    <Col xs="12" md="9">
+                    <Col xs="6" md="9">
                   <select className="select-css" name="select" id="select" required placeholder="Genre"  defaultValue={this.state.genre}
                     onChange={evenement=>this.setState({genre:evenement.target.value})}>
                     <option value={"0"}> Choisir votre genre </option>
@@ -284,10 +352,10 @@ this.setState({file:file})
 
 
                   <FormGroup row>
-                    <Col md="3">
+                    <Col >
                       <Label htmlFor="file-input">Image</Label>
                     </Col>
-                    <Col xs="12" md="9">
+                    <Col xs="6" md="9">
                       <Input type="file" 
                       onChange={this.handleChangeFile}
                       id="file-input" nom="file-input" />
@@ -305,9 +373,20 @@ this.setState({file:file})
                       </Label>
                     </Col>
                   </FormGroup>
-           
+                  <FormGroup row>
+                    <Col >
+                      <Label htmlFor="file-input">Diplome</Label>
+                    </Col>
+                    <Col xs="6" md="9">
+                    <Input
+                        defaultValue={this.state.diplome}
+                        onChange={evenement=>this.setState({diplome:evenement.target.value})}
+                      type="textarea" id="text-input" nom="text-input33" placeholder="diplome" />
+                    </Col>
+                  </FormGroup>
+                 
                 </Form>
-              
+              <br></br>
                 <Button 
                  onClick={this.handelSubmit.bind(this)}
                 type="submit" size="sm" color="primary"><i classnom="fa fa-dot-circle-o"></i> Submit</Button>
@@ -315,6 +394,10 @@ this.setState({file:file})
           
          
        </div>
+       <div className="signup-image">
+                <figure><img src="images/signup-imagem.jpg" alt="sing up image" /></figure>
+                <Link to="loginmedecin" className="signup-image-link">Je suis déjà membre</Link>
+              </div>
        </div>
        </div>
         </section>

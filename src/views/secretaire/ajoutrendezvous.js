@@ -84,7 +84,7 @@ class Forms extends Component {
 
 
 
-onchange= (event) => {
+onChange= (event) => {
     this.setState({date: event.target.value});
     this.setState({heure: event.target.value});
     this.setState({tel: event.target.value});
@@ -94,11 +94,9 @@ onchange= (event) => {
    
   }
 
-  handleChange = (event) => {
-    this.logs.unshift("change: " + event.target.value);
-
-    
-}
+//   handleChange = (event) => {
+//     this.logs.unshift("change: " + event.target.value);
+// }
   render() {
     return (
       <div className="animated fadeIn">
@@ -179,7 +177,7 @@ onchange= (event) => {
                     <Col xs="12" md="9">
                       <Input   defaultValue={this.state.tel} 
                       onChange={evenement=>this.setState({tel:evenement.target.value})}
-                       type="text" id="text-input" name="text-input"/>
+                       type="Number" id="text-input" name="text-input"/>
                     
                     </Col>
                   </FormGroup>            

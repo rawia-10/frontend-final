@@ -127,12 +127,16 @@ next = (last === currentPage) ? currentPage : currentPage + 1;
       
     return (
       <div className="animated fadeIn">
+         <br></br>
+         <Link to="/home/ajoutpatient">     <Button className="button1" color="info" style={{position: "absolute", right: "0"}}>Ajouter Patient</Button></Link>
         <Row> 
           <Col xs="12" lg="6"><img src="/img/team.png" style={{height: '500px width:50px'}} /> Patient</Col>
           <Col  xs="12" lg="6">
-     <Link to="/home/ajoutpatient">     <Button color="info">Ajouter Patient</Button></Link>
+     
      </Col>
         </Row>
+        <br></br>
+     
         <Row>
           {/*  */}
           <Col xs="12" lg="12">
@@ -150,12 +154,12 @@ next = (last === currentPage) ? currentPage : currentPage + 1;
                   <thead>
                   <tr>
                   <th>nom </th>
-                    <th>prenom</th>
+                    <th>prénom</th>
                     {/* <th>date naissance</th>
                     <th>genre</th>
                     <th>email</th>*/}
                     <th>adresse</th> 
-                    <th>Télephone</th>
+                    <th>Téléphone</th>
                     <th>Actions</th>
                   </tr>
                   </thead>
@@ -175,9 +179,9 @@ next = (last === currentPage) ? currentPage : currentPage + 1;
                   <div>
 
 
-  <Link to={`/secretaire/info/${item._id}`}  className="view" title="view" data-toggle="tooltip">    <i className="fa fa-eye" style={{fontSize: '24px'}} /></Link>
-  <i className="edit" title="Edit" data-toggle="tooltip"  onClick={evt=>this.handleClickEdit(evt,item._id)}  className="fa fa-edit" style={{fontSize: '24px',color:"green"}}></i>
-  <i className="delete" title="Delete" data-toggle="tooltip" className="fa fa-trash-o" style={{fontSize: '24px', color: 'red'}} onClick={evt=>this.handleClickDelete(evt,item._id)}  ></i>
+  <Link to={`/secretaire/info/${item._id}`}  className="view" title="view" data-toggle="tooltip">    <i className="fa fa-eye" style={{fontSize: '24px'}} /></Link> &nbsp; &nbsp;
+  <i className="edit" title="Edit" data-toggle="tooltip"  onClick={evt=>this.handleClickEdit(evt,item._id)}  className="fa fa-edit" style={{fontSize: '24px',color:"green"}}></i> &nbsp; &nbsp;
+  <i className="delete" title="Delete" data-toggle="tooltip" className="fa fa-trash-o" style={{fontSize: '24px', color: 'red'}} onClick={evt=>this.handleClickDelete(evt,item._id)}  ></i> &nbsp; &nbsp;
 
   </div>
                     </td>
@@ -187,7 +191,7 @@ next = (last === currentPage) ? currentPage : currentPage + 1;
                 }
                   </tbody>
                 </Table>
-                <nav>
+                <nav style={{right:"0"}}>
    
    <Pagination>
     

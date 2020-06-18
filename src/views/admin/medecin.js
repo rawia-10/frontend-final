@@ -130,7 +130,7 @@ next = (last === currentPage) ? currentPage : currentPage + 1;
           <Col xs="12" lg="12">
             <Card>
               <CardHeader>
-                 Liste medecin
+                 Liste médecin
               </CardHeader>
              <CardBody>
               <form action="#" class="menu_search_form">
@@ -143,9 +143,9 @@ next = (last === currentPage) ? currentPage : currentPage + 1;
                   <tr>
                   <th>Photo</th>
                   <th>nom </th>
-                    <th>prenom</th>
+                    <th>prénom</th>
                     <th>adresse</th> 
-                    <th>Télephone</th>
+                    <th>Téléphone</th>
                     <th>Spécialité</th>
                    
                     <th>Actions</th>

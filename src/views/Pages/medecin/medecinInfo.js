@@ -64,6 +64,8 @@ class Medecininfo extends Component {
             image:"",
             date_naissance:"",
             email:"",
+            assurance_maladie:"",
+            diplome:""
             }
         };
     }
@@ -135,20 +137,25 @@ class Medecininfo extends Component {
           <div className="containere">
            
             <div className="signin-content ">
-              <div className="signin-image col-lg-5">
+              {/* <div className="signin-image col-lg-5"> */}
                
               <img src={`http://localhost:5000/medecin/getfile/${this.state.image}`}height="250" width="250"/>
-              </div>
+              {/* </div> */}
               <div className="col-lg-4">
-              <h3 className="font-weight-bold"> {this.state.nom} {this.state.prenom} </h3>
+              <h2 className="font-weight-bold"> {this.state.nom} {this.state.prenom} </h2>
               <p className="text-muted">{this.state.address}</p>
               <p className="fa fa-phone"> {this.state.tel}  </p><br></br>
-              <p className="fa fa-phone"> {this.state.fix}</p> <br></br>
+              <p className="fa fa-phone" style={{fontStyle:'bold'}}> {this.state.fix}</p> <br></br>
               <p className="icon-envelope"> {this.state.email}</p>
              
               </div>
+              
+
               </div>
-              <hr style={{border: '1px solid black'}} />
+                <hr style={{border: '1px  black'}} />  
+             
+             
+              
               <table>
                 <th> <h3>Qualification professionnelle</h3></th>
                 <tr>
@@ -157,7 +164,7 @@ class Medecininfo extends Component {
                   
                   </td>
                   <td>
-                  <h3 className="font-weight-bold"> {this.state.nom} {this.state.prenom} </h3>
+                  <p className="font-weight-bold"> {this.state.nom} {this.state.prenom} </p>
                   </td>
                 </tr>
                 <tr>
@@ -168,24 +175,39 @@ class Medecininfo extends Component {
                   <p className="font-weight-bold">{this.state.specialite}</p>
                   </td>
                 </tr>
+              
+                <th> <h3>Informations pratiques</h3></th>
+                <tr>
+                  <td>
+                  <b>Assurance maladie</b>
+                  
+                  </td>
+                  <td>
+                  <p className="font-weight-bold"> {this.state. assurance_maladie}  </p>
+                  </td>
+                </tr>
+                <th> <h3>Informations pratiques</h3></th>
+                <tr>
+                  <td>
+                  <b>Diplome</b>
+                  
+                  </td>
+                  <td>
+                  <p className="font-weight-bold"> {this.state.diplome}  </p>
+                  </td>
+                </tr>
               </table>
         
+
+
+
+
+
+
+        
              
-              
-              
-
-
-
-
-
-
-         <div className="signin-content ">
-              <div className="signin-image col-lg-5">
-               
-           
-              </div>
-              <Link to="/rdv"><button className="info">Rendez-vous</button></Link>
-         </div>
+              <Link to="/rdv">  <Button  type="submit" size="xl" color="primary"><i className="fa fa-dot-circle-o"></i> Prendre rendez-vous</Button></Link>
+         
           </div>
          
         </section>

@@ -24,6 +24,7 @@ class Tables extends Component {
         this.state={
 
           medecin: [],
+          image:"",
           currentPage: 1,
       todosPerPage: 5,
 
@@ -77,7 +78,10 @@ handleFirstClick(event) {
         }
 
 
-
+      
+  
+ 
+       
 handlechange=(e)=>{
  this.setState({keyword:e.target.value})
 }
@@ -174,19 +178,21 @@ handlechange=(e)=>{
        <Table hover bordered striped responsive size="xl">
          <thead>
          <tr>
-         <th>nom et prenom</th>
+          <th>Photo</th>
+         <th>nom et prénom</th>
         <th>adresse</th>
-       <th>specialite</th>
+       <th>spécialité</th>
          <th>Action</th>
          </tr>
          </thead>
 
          <tbody>
-    {currentTodos.filter(item => item.nom.toUpperCase().includes(this.state.keyword.toUpperCase().trim())).map((item, index) =>{
+    {currentTodos.filter(item => item.specialite.toUpperCase().includes(this.state.keyword.toUpperCase().trim())).map((item, index) =>{
 
 
        return(
          <tr key={index}>
+            <td>   <img src={`http://localhost:5000/medecin/getfile/${item.image}`}height="50" width="50"/></td>
          <td>{item.nom} {item.prenom}</td>
          <td>{item.address}</td>
        <td>{item.specialite}</td>

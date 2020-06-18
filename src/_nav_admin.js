@@ -8,17 +8,17 @@ export default {
     },
    
     {
-      name: 'Medecin',
+      name: 'Médecin',
       url: '/base',
       icon: 'fa fa-user-md',
       children: [
         {
-          name: 'Liste medecin ',
+          name: 'Liste medécin ',
           url: '/admin/listemedecin',
           icon: 'icon-cursor',
         },
         {
-          name: 'Ajout medecin',
+          name: 'Ajout médecin',
           url: '/admin/ajoutmedecin',
           icon: 'icon-cursor',
         },

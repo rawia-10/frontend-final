@@ -59,7 +59,7 @@ class Login extends Component {
                <a className="dropdown-item">Secrétaire</a>
                  </Link> 
                <Link to="loginmedecin" >
-                 <a className="dropdown-item">Medecin</a>
+                 <a className="dropdown-item">Médecin</a>
               </Link>
             </div>
             </li>
@@ -77,7 +77,7 @@ class Login extends Component {
         <div className="container">
           <div className="row">
             <div className="col-lg-5">
-              <h4>Caring for better life</h4>
+              <h4>Prendre soin d'une vie meilleure</h4>
              <h1> Meilleurs Soins &amp;
                   Meilleur Médecin</h1>
               <Link to="/Medecin" className="btn_2">Rechercher votre Médecin</Link>

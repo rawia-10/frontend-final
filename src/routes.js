@@ -44,6 +44,7 @@ const LoginS =React.lazy(() => import('./views/Pages/LoginS/LoginS'));
 const PatientInfobyS = React.lazy(() => import('./views/secretaire/patientInfobyS'));
 const updateP = React.lazy(() => import('./views/secretaire/UpdatePatient'));
 const sendmail = React.lazy(() => import('./views/secretaire/sendmail'));
+const sendsms = React.lazy(() => import('./views/secretaire/sendsms'));
 //médecin
 const listRDV = React.lazy(() => import('./views/medecin/rdv'));
 const listeP = React.lazy(() => import('./views/medecin/patient'));
@@ -118,6 +119,7 @@ const routes = [
   { path: '/secretaire/info/:id', exact: true, name: 'Patient info', component: PatientInfobyS },
   { path: '/secretaire/update', exact: true, name: 'Patient info', component: updateP },
   { path: '/secretaire/sendmail', exact: true, name: 'Patient info', component: sendmail },
+  { path: '/secretaire/sendsms', exact: true, name: 'Patient info', component: sendsms },
   //medecin
    { path: '/home/listepatients', exact: true, name: 'listepatient', component: listeP },
    { path: '/home/listerendezvouss', exact: true, name: 'liste rendezvous', component: listRDV },

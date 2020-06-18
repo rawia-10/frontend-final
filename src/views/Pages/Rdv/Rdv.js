@@ -1,7 +1,4 @@
 import React, { Component } from 'react';
-import Moment from 'react-moment';
-import { Link } from 'react-router-dom'
-import dotenv from  'dotenv'
 import {
   Badge,
   Button,
@@ -27,95 +24,94 @@ import {
   Label,
   Row,
 } from 'reactstrap';
-import image from '../logo.png';
-import { ToastsContainer, ToastsStore } from 'react-toasts';
+import * as ReactDOM from 'react-dom';import { TimePicker } from '@progress/kendo-react-dateinputs';
 import axios from 'axios';
-import JwtDecode from 'jwt-decode';
-import Switch from "react-switch";
+import { DateTime } from 'react-datetime-bootstrap';
+import { Link } from 'react-router-dom';
+import image from '../logo.png';
 
+class Forms extends Component {
+  logs = [];
+  constructor(props) {
+    super(props);
 
-class Medecininfo extends Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            collapse: true,
-            fadeIn: true,
-            timeout: 300,
-            nom:"",
-            prenom:"",
-            heure:"",
-            date:"",
-            email:"",
-            tel:"",
-
-        };
-    }
-    handleChange = e => {
-      if (e.target.name === 'nom') {
-        this.setState({ nom: e.target.value });
-      }
-      if (e.target.name === 'prenom') {
-        this.setState({ prenom: e.target.value });
-      }
-      if (e.target.name === 'heure') {
-        this.setState({ heure: e.target.value });
-      }
-      if (e.target.name === 'date') {
-        this.setState({ date: e.target.value });
-      }
-      if (e.target.name === 'email') {
-        this.setState({ email: e.target.value });
-      }
-      if (e.target.name === 'tel') {
-        this.setState({ tel: e.target.value });
-      }
-  
+    this.toggle = this.toggle.bind(this);
+    this.toggleFade = this.toggleFade.bind(this);
+    this.state = {
+      collapse: true,
+      fadeIn: true,
+      timeout: 300,
+      date:"",
+      heure:"",
+      email:"",
+      tel:"",
+      nom:"",
+      prenom:"",
     
-  
-  
-  
-  
-  
     };
-  
-
-    handleSubmit = () => {
-
-      axios.post("http://localhost:5000/rdv/addrdv", {
-        nom:this.state.nom,
-        prenom:this.state.prenom,
-        heure:this.state.heure,
-        email:this.state.email,
-        tel:this.state.tel,
-        date:this.state.date,
-  
-  
-      },
-  
-  
-    )   .then(res=>{
-      console.log("data",res.data)
-      window.location.href="/#/loginsecretaire"
-    })
   }
 
-    render() {
-        return (
-            <div>
+  toggle() {
+    this.setState({ collapse: !this.state.collapse });
+  }
+
+  toggleFade() {
+    this.setState((prevState) => { return { fadeIn: !prevState }});
+  }
+  handelSubmit()
+  {
+      console.log("state",this.state.date, this.state.heure,this.state.tel,this.state.email,this.state.nom,this.state.prenom)
+      axios.post("http://localhost:5000/rdv/addrdv",{
+      date:this.state.date,
+      heure:this.state.heure,
+      tel:this.state.tel,
+      email:this.state.email,
+      nom:this.state.nom,
+      prenom:this.state.prenom,
+     
+      })
+.then(res=>{
+    console.log("data",res.data);
+    window.location.href="/#/home/listerendezvous"
+})
+
+  }
 
 
-{/* Header Area Starts */}
+  reset()
+  {
+      this.setState({date:"",heure:"",email:"",tel:"",nom:"",prenom:""})
+  }
+
+
+
+onChange= (event) => {
+    this.setState({date: event.target.value});
+    this.setState({heure: event.target.value});
+    this.setState({tel: event.target.value});
+    this.setState({email: event.target.value});
+    this.setState({nom: event.target.value});
+    this.setState({prenom: event.target.value});
+   
+  }
+
+//   handleChange = (event) => {
+//     this.logs.unshift("change: " + event.target.value);
+// }
+  render() {
+    return (
+      <div>
+         {/* Header Area Starts */}
 <header className="header-area">
         <div id="header">
           <div className="container">
             <div className="row align-items-center justify-content-between d-flex">
               <div id="logo">
-              <Link to="login"><img src="assets/images/logo/logo.png" alt="" title /></Link>
+                <a href="index.html"><img src="assets/images/logo/logo.png" alt="" title /></a>
               </div>
               <nav id="nav-menu-container">
                 <ul className="nav-menu">
-                <li className="menu-active"><Link to="login">Accueil</Link></li>
+                  <li className="menu-active"><Link to="login">Accueil</Link></li>
                   <li><Link to="login">A Propos</Link></li>
                   <li><Link to="login">Contact</Link></li>
                   <li className="nav-item dropdown">
@@ -142,73 +138,53 @@ class Medecininfo extends Component {
         </div>
       </header>
       {/* Header Area End */}
-                 
-                 
-                   
-      <section className="banner-areaa">
-         
-          <div className="containere">
-           
-         <div className="signin-content ">
-              <div className="signin-image col-lg-5">
-               
-           
-              </div>
-              <div className="col-lg-4">
-              
-             
-             
-
-
-              <Form action="" method="" encType="multipart/form-data" className="form-horizontal">
+      <div className="banner-areaa">
+      <div className="containere">
+      <div className="signup-form">
+    <br></br>
+      <Form method="" className="f" >
                 
-                <FormGroup row>
-                    <Col md="3">
-                      <Label htmlFor="text-input">nom</Label>
-                    </Col>
-                    <Col xs="12" md="9">
-                      <Input   defaultValue={this.state.nom}
-                      onChange={evenement=>this.setState({nom:evenement.target.value})}
-                       type="text" id="text-input" name="text-input"/>
-                    
-                    </Col>
-                  </FormGroup> 
-                  <FormGroup row>
-                    <Col md="3">
-                      <Label htmlFor="text-input">prenom</Label>
-                    </Col>
-                    <Col xs="12" md="9">
-                      <Input   defaultValue={this.state.prenom} 
-                      onChange={evenement=>this.setState({renom:evenement.target.value})}
-                       type="text" id="text-input"/>
-                    
-                    </Col>
-                  </FormGroup> 
+             <InputGroup className="mb-3">
+                  <InputGroupAddon addonType="prepend">
+                  <InputGroupText>
+                    <i className="icon-user"></i>
+                  </InputGroupText>
+                </InputGroupAddon>
+                    <Input defaultValue={this.state.nom} required
+                      onChange={evenement=>this.setState({nom:evenement.target.value})} type="text" name="nom" id="nom" placeholder="nom" />
+                  </InputGroup>
+
+                  <InputGroup className="mb-3">
+                  <InputGroupAddon addonType="prepend">
+                  <InputGroupText>
+                    <i className="icon-user"></i>
+                  </InputGroupText>
+                </InputGroupAddon>
+                    <Input defaultValue={this.state.prenom} required
+                      onChange={evenement=>this.setState({prenom:evenement.target.value})} type="text" name="nom" id="nom" placeholder="prénom" />
+                  </InputGroup> 
           
-                  
-                <FormGroup row>
-                    <Col md="3">
-                      <Label htmlFor="date-input">date  </Label>
-                    </Col>
-                    <Col xs="12" md="9">
-                      <Input defaultValue={this.state.date} 
-                      onChange={evenement=>this.setState({date:evenement.target.value})}
-                       type="date" id="date-input" name="date-input"  />
-                    </Col>
-                  </FormGroup>
+                  <InputGroup className="mb-3">
+                  <InputGroupAddon addonType="prepend">
+                  <InputGroupText>
+                  <i className="icon-calendar"></i>
+                  </InputGroupText>
+                </InputGroupAddon>
+                    <Input defaultValue={this.state.date} required
+                      onChange={evenement=>this.setState({date:evenement.target.value})} type="Date" name="re_pass" id="re_pass" placeholder="date" />
+                 </InputGroup>
              
 
-       
+                 <InputGroup className="mb-3">
+                  <InputGroupAddon addonType="prepend">
+                  <InputGroupText>
+                  <i className="fa fa-clock-o"></i> 
+                  </InputGroupText>
+                </InputGroupAddon>
 
-       
-                  <FormGroup row>
-                    <Col md="3">
-                      <Label>Heure</Label>
-                    </Col>
-                    <Col md="9">
-                    <select className="select-css" name="select" id="select" required placeholder="Genre"  defaultValue={this.state.heure}
+                  <select className="select-css" name="select" id="select" required placeholder="Heure"  defaultValue={this.state.heure}
                     onChange={evenement=>this.setState({heure:evenement.target.value})}>
-                    <option value={"0"}> Choisir Heure </option>
+                     <option value={"0"}> Choisir Heure </option>
                             <option value="8 H"> 8H</option>
                              <option value="9 H"> 9H </option>       
                              <option value="10 H"> 10H</option>
@@ -219,54 +195,43 @@ class Medecininfo extends Component {
                             
                    </select>
 
-                    </Col>
-                  </FormGroup>
+                  </InputGroup>
 
-                  <FormGroup row>
-                    <Col md="3">
-                      <Label htmlFor="text-input">Téléphone</Label>
-                    </Col>
-                    <Col xs="12" md="9">
-                      <Input   defaultValue={this.state.tel} 
-                      onChange={evenement=>this.setState({tel:evenement.target.value})}
-                       type="text" id="text-input" name="text-input"/>
-                    
-                    </Col>
-                  </FormGroup>            
-                  <FormGroup row>
-                    <Col md="3">
-                      <Label htmlFor="text-input">email</Label>
-                    </Col>
-                    <Col xs="12" md="9">
-                      <Input   defaultValue={this.state.email} 
-                      onChange={evenement=>this.setState({email:evenement.target.value})}
-                       type="text" id="text-input" name="text-input"/>
-                    
-                    </Col>
-                  </FormGroup>
-                  <FormGroup>
-                  <Button color="info" className="xl px-5 "   onClick={this.handleSubmit.bind(this)}>
-              Envoyer</Button> 
-                  </FormGroup>
+       
                 
+                  <InputGroup className="mb-3">
+                  <InputGroupAddon addonType="prepend">
+                  <InputGroupText>
+                    <span>+216</span>
+                  </InputGroupText>
+                </InputGroupAddon>
+                    <Input defaultValue={this.state.tel} required
+                      onChange={evenement=>this.setState({tel:evenement.target.value})} type="Number" name="re_pass" id="re_pass" placeholder="Téléphone" />
+                  </InputGroup>
+
+                  <InputGroup className="mb-3">
+                  <InputGroupAddon addonType="prepend">
+                  <InputGroupText>
+                   <span>@</span>
+                  </InputGroupText>
+                </InputGroupAddon>
+                    <Input defaultValue={this.state.email} required
+                      onChange={evenement=>this.setState({email:evenement.target.value})} type="email" name="email" id="email" placeholder=" Email" />
+                  </InputGroup>
+
+                  <Button onClick={this.handelSubmit.bind(this)} type="submit" size="sm" color="primary"><i className="fa fa-dot-circle-o"></i> Envoyer</Button>
+                <Button  onClick={this.reset.bind(this)} type="reset" size="sm" color="danger"><i className="fa fa-ban"></i> Annuler</Button>
+             
 
 </Form>
-             
- 
+           
+               
+       </div>
+      </div>
+      </div>
+   
 
-
-
-
-
-
-    </div>
-         </div>
-          </div>
-         
-        </section>
-              
-       {/* footer  */}           
- <footer className="hotline-area text-center section-padding">
+<footer className="hotline-area text-center section-padding">
       <div className="container">
       <div className="row">
      
@@ -297,10 +262,12 @@ class Medecininfo extends Component {
           </div>
         </div>
       </footer>
-      {/* footer end */}
-           
-            </div>
-        );
-    }
+    
+
+      </div>
+      
+      );
+  }
 }
-export default Medecininfo;
+
+export default Forms;

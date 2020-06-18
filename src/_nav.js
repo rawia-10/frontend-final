@@ -28,17 +28,17 @@ export default {
 
 
     {
-      name: 'rendezvous',
+      name: 'Rendez-vous',
       url: '/base',
       icon: 'icon-notebook',
       children: [
         {
-          name: 'Liste rendezvous ',
+          name: 'Liste rendez-vous ',
           url: '/home/listerendezvous',
           icon: 'icon-cursor',
         },
         {
-          name: 'Ajout rendezvous',
+          name: 'Ajout rendez-vous',
           url: '/home/ajoutrendezvous',
           icon: 'icon-cursor',
         },
