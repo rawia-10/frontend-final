@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { HashRouter, Route, Switch,Redirect, BrowserRouter} from 'react-router-dom';
+import { HashRouter, Route,Router, Switch,Redirect, BrowserRouter} from 'react-router-dom';
 // import { renderRoutes } from 'react-router-config';
 import './App.scss';
+
 
 // import Navbar from './Navbar';
 // import Footer from './Footer'
@@ -28,7 +29,7 @@ const Medecininfo =React.lazy(()=>import('./views/Pages/medecin'));
 const Rdv =React.lazy(()=>import('./views/Pages/Rdv'));
 const RegisterP = React.lazy(() => import('./views/Pages/RegisterP'));
 const Infomedecin  = React.lazy(() => import('./views/Pages/medecin/medecinInfo'))
-
+const Pdf  = React.lazy(() => import('./views/Pages/Pdf'))
 class App extends Component {
  
 
@@ -51,6 +52,8 @@ class App extends Component {
               <Route exact path="/registerM" name="Register Page" render={props => <RegisterM {...props}/>} />
               <Route exact path="/404" name="Page 404" render={props => <Page404 {...props}/>} />
               <Route exact path="/login/admin" name="Page 500" render={props => <LoginAdmin {...props}/>} />
+
+              <Route exact path="/pdf" name="Page 500" render={props => <Pdf {...props}/>} />
             
               <Route exact path="/patient/:id" name="Page Patient" render={props => <Patient {...props}/>} />  
               <Route exact path="/Medecin" name="Page Medecin" render={props => <Medecin {...props}/>} /> 
@@ -58,8 +61,7 @@ class App extends Component {
 
               <Route exact path="/Medecininfo" name="Page Medecin" render={props => <Medecininfo {...props}/>} />
               <Route path="/" name="Home" render={props => <DefaultLayout {...props}/>} />
-
-
+              
               </Switch>
               {/* <Footer/> */}
           </React.Suspense>
