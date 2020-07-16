@@ -46,6 +46,13 @@ export default {
       ],
     },
 
+    {
+      name: 'Profile',
+      url: '/secretaire/infos/:id',
+      icon: 'icon-notebook',
   
+
+    
+    },
   ],
 };

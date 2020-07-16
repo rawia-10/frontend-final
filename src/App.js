@@ -24,6 +24,8 @@ const LoginAdmin = React.lazy(() => import('./views/Pages/LoginAdmin'));
 const RegisterM =React.lazy(()=>import('./views/Pages/RegisterM'));
 const Patient =React.lazy(()=>import('./views/Pages/Info.js'));
 const LoginP =React.lazy(()=>import('./views/Pages/LoginP'));
+const Compte =React.lazy(()=>import('./views/Pages/Compte'));
+
 const Medecin =React.lazy(()=>import('./views/Pages/medecin'));
 const Medecininfo =React.lazy(()=>import('./views/Pages/medecin'));
 const Rdv =React.lazy(()=>import('./views/Pages/Rdv'));
@@ -46,6 +48,8 @@ class App extends Component {
               <Route exact path="/reset/:token" name="Login Page" render={props => <Newpwd {...props}/>} />
               <Route exact path="/loginmedecin" name="Login Page" render={props => <LoginM {...props}/>} />
               <Route exact path="/loginpatient" name="Login Page" render={props => <LoginP {...props}/>} />
+              <Route exact path="/compte" name="compte Page" render={props => <Compte {...props}/>} />
+
               <Route exact path="/infomedecin/:id" name="Login Page" render={props => <Infomedecin {...props}/>} />
               <Route exact path="/register" name="Register Page" render={props => <Register {...props}/>} />7
               <Route exact path="/registerP" name="Register Page" render={props => <RegisterP {...props}/>} />

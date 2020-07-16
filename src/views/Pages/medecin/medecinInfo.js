@@ -51,12 +51,16 @@ class Medecininfo extends Component {
             date_naissance:"",
             email:"",
             tel:"",
+            assurance_maladie:"",
+            fix:"",
             password:"",
             specialite:"",
             CreatedAt: "",
             UpdatedAt: "",
            
             patient:{
+              tel:"",
+              fix:"",
               nom:"",
             prenom:"",
             address:"",
@@ -183,7 +187,7 @@ class Medecininfo extends Component {
                   
                   </td>
                   <td>
-                  <p className="font-weight-bold"> {this.state. assurance_maladie}  </p>
+                  <p className="font-weight-bold"> {this.state.assurance_maladie}  </p>
                   </td>
                 </tr>
                 <th> <h3>Informations pratiques</h3></th>

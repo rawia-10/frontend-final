@@ -134,6 +134,13 @@ remove(id)
        
              
       <div className="animated fadeIn">
+           <Row> 
+          <Col xs="12" lg="6"><img src="../img/rdv.png" /> Rendez-vous</Col>
+          <Col  xs="12" lg="6">
+    {/* <Button color="info" onClick={this.toggleInfo}>Ajouter Remarque</Button> */}
+     </Col>
+
+        </Row>
         <Row>
 
          

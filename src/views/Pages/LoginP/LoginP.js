@@ -3,7 +3,7 @@
 
 
 import dotenv from  'dotenv'
-import React, { Component } from 'react';
+import React, { Component, } from 'react';
 import { Button, Card, CardBody, CardFooter,CardGroup, Col, Container, Form, Input, InputGroup, InputGroupAddon, InputGroupText, Row } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import image from '../logo.png';
@@ -12,105 +12,42 @@ import axios from 'axios';
 import JwtDecode from 'jwt-decode';
 
 class LoginP extends Component {
-
-  constructor(props) {
+  state = {
+    email : null ,
+    password: null
+}
+constructor(props) {
     super(props);
 
-    this.state = {
-      collapse: true,
-      fadeIn: true,
-      timeout: 300,
-      email:"",
-      password:"",
-      erreur:false,
-      EmailErr: "",
-      PasswordErr: "",
+    this.login = this.login.bind(this);
+}
+ 
+login(event){
+    //Authorization: Basic YWRtaW46YWRtaW4=
+    //alert('begin login');
+        axios.post('http://localhost:5000/patient/login', {
+            'email': this.state.email ,
+            'password': this.state.password
+        },{
+            headers: { 'content-type': 'multipart/form-data' }
+        }).then(response => {
+            // handle success
+            localStorage.setItem('Authorization',response.data.authorisation );
+            localStorage.setItem('User', JSON.stringify(response.data.user ) );
+
+            this.props.history.push('/login');
+           
+        })
+        .catch((error) => {
+            // handle error
+            console.log("login ko :" , error);
+        });
 
 
-    };
-
-    dotenv.config()
-
-  }
-
-
-
-Login=()=> {
-  axios.post("http://localhost:5000/patient/login", {
-    email: this.state.email,
-    password: this.state.password
-  })
-    .then(res => {
-
-      if (res.data['status'] === "error") {
-        alert(" verifier votre login ou password")
-      }
-      else {
-
-
-         console.log(res.data.data.token);
-
-         //console.log(JSON.parse(JSON.stringify(JSON.parse(JSON.stringify(res)).data)).user);
-
-
-
-            if (res.data.data.user.role.nom=== 'patient' ) {
-              localStorage.setItem('role', res.data.data.user.role.nom);
-              this.props.history.push('/login'); //redirection mrigla zeda
-            }
-      }
-
-    })}
-
-validate = () => {
-
-  let isError = false;
-
-  const errors = {
-    EmailErr: "",
-    PasswordErr: "",
-  }
-
-  console.log("login ",this.state.email);
-  console.log("pws ",this.state.password);
-
-
-
-  const regex1=/^[a-zA-Z0-9._-]+$/;
-
-
-  if ((this.state.email==="")||(this.state.Emaemailil.length > 30)||!regex1.test(this.state.email)) {
-
-    isError = true;
-    errors.EmailErr = "Veuillez verifier votre Email";
-  }
-
-
-  if ((this.state.password==="")||(this.state.password.length > 20)) {
-
-    isError = true;
-    errors.PasswordErr = "veuillez verifier votre mot de passe";
-  }
-
-
-
-  if (isError) {
-    this.setState({
-      ...this.state,
-      ...errors
-    })
-  }
-
-  console.log("errrr ", isError)
-
-
-  this.setState({
-    erreur:isError
-  })
-
-  return isError;
+    event.preventDefault();
 }
 
+ 
 
   handleChange = (e) => {
 
@@ -235,7 +172,7 @@ validate = () => {
             }
               <Row>
                 <Col xs="8">
-                <Button color="info" className="s px-5 " onClick={this.Login}  >
+                <Button color="info" className="s px-5 " onClick={this.login}  >
                   <span>Connexion</span></Button>
                 </Col>
               
@@ -311,3 +248,100 @@ validate = () => {
 export default LoginP;
 
 
+// constructor(props) {
+//   super(props);
+
+//   this.state = {
+//     collapse: true,
+//     fadeIn: true,
+//     timeout: 300,
+//     email:"",
+//     password:"",
+//     erreur:false,
+//     EmailErr: "",
+//     PasswordErr: "",
+
+
+//   };
+
+//   dotenv.config()
+
+// }
+
+
+
+// Login=()=> {
+// axios.post("http://localhost:5000/patient/login", {
+//   email: this.state.email,
+//   password: this.state.password
+// })
+//   .then(res => {
+
+//     if (res.data['status'] === "error") {
+//       alert(" verifier votre login ou password")
+//     }
+//     else {
+
+
+//        console.log(res.data.data.token);
+
+//        //console.log(JSON.parse(JSON.stringify(JSON.parse(JSON.stringify(res)).data)).user);
+
+
+
+//           if (res.data.data.user.__t=== 'patient' ) {
+//             localStorage.setItem('role', res.data.data.user.__t);
+//             this.props.history.push('/login'); //redirection mrigla zeda
+//           }
+//     }
+
+//   })}
+
+// validate = () => {
+
+// let isError = false;
+
+// const errors = {
+//   EmailErr: "",
+//   PasswordErr: "",
+// }
+
+// console.log("login ",this.state.email);
+// console.log("pws ",this.state.password);
+
+
+
+// const regex1=/^[a-zA-Z0-9._-]+$/;
+
+
+// if ((this.state.email==="")||(this.state.Emaemailil.length > 30)||!regex1.test(this.state.email)) {
+
+//   isError = true;
+//   errors.EmailErr = "Veuillez verifier votre Email";
+// }
+
+
+// if ((this.state.password==="")||(this.state.password.length > 20)) {
+
+//   isError = true;
+//   errors.PasswordErr = "veuillez verifier votre mot de passe";
+// }
+
+
+
+// if (isError) {
+//   this.setState({
+//     ...this.state,
+//     ...errors
+//   })
+// }
+
+// console.log("errrr ", isError)
+
+
+// this.setState({
+//   erreur:isError
+// })
+
+// return isError;
+// }

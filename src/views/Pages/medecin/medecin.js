@@ -187,9 +187,9 @@ handlechange=(e)=>{
          </thead>
 
          <tbody>
-    {currentTodos.filter(item => item.specialite.toUpperCase().includes(this.state.keyword.toUpperCase().trim())).map((item, index) =>{
-
-
+    {/* {currentTodos.filter(item => item.nom.toUpperCase().includes(this.state.keyword.toUpperCase().trim())).map((item, index) =>{ */}
+    {
+    currentTodos.map((item,index) =>{
        return(
          <tr key={index}>
             <td>   <img src={`http://localhost:5000/medecin/getfile/${item.image}`}height="50" width="50"/></td>

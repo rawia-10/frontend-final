@@ -1,6 +1,6 @@
 {
-  "name": "LoginP",
+  "name": "Compte",
   "version": "0.0.0",
   "private": true,
-  "main": "./LoginP.js"
+  "main": "./Compte.js"
 }

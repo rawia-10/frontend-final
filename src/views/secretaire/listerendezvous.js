@@ -73,29 +73,18 @@ componentDidMount()
         {
         this.getall()
         }
-handleClickDelete(e,id){
-            e.preventDefault();
-            console.log("id",id);
-            this.remove(id);
-                     }
+
             
             
                 
-                     
-remove(id)
-            {
-              fetch("http://127.0.0.1:5000/rdv/delete/"+id,{method:"DELETE"})
-              .then(response=>response.json())
-              .then(data=>{
-                  console.log("remove",data) ;
-                  this.getall();
-            }  )
-            }
-
-            // onchange= (event) => {
-            //     this.setState({nom: event.target.value});
-            //     this.setState({prenom: event.target.value});
-            //   }
+           
+handleClickEdit(e,id){
+  e.preventDefault();
+    console.log("id",id);
+    localStorage.setItem("idc",id);
+      window.location.href="/#/secretaire/sendmail"
+                 }           
+        
             
  handelChange=(e)=>{
               this.setState({keyword:e.target.value})
@@ -133,12 +122,15 @@ remove(id)
        
              
       <div className="animated fadeIn">
-         <Row> 
-          <Col xs="12" lg="6"><img src="/img/rdv.png" style={{height: '70px', width:'70px'}} /> Rendez vous</Col>
-          <Col  xs="12" lg="6">
-     <Link to="/home/ajoutpatient">     <Button color="info">Ajouter rendez-vous</Button></Link>
-     </Col>
+       <br></br>
+       <Link to="/home/ajoutrendezvous">     <Button className="button1" color="info" style={{position: "absolute", right: "0"}}>Ajouter rendez-vous</Button></Link>
+    
+        <Row>
+       <Col xs="12" lg="6"><img src="../img/rdv.png" /> Rendez-vous</Col>
+      
         </Row>
+
+
         <Row>
 
          
@@ -182,7 +174,7 @@ remove(id)
                   {/* // <div className="App"> */}
        
                   <Link to="/secretaire/sendmail">
-                    <button type="button" name="" id="" className="btn btn-success font-weight-bold "  >
+                    <button type="button" name="" id="" onClick={evt=>this.handleClickEdit(evt,item._id)} className="btn btn-success font-weight-bold "  >
                     <i className="fa fa-send pr-2"></i> Accept</button>
                     </Link>
 

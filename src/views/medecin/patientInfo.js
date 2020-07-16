@@ -135,10 +135,10 @@ class PatientInfobyS extends Component {
                                                     </div>
                                                 </Link>
                                                 
-                                               {/* <Link to={`/medecin/remarque/${item._id}`} > */}
-                                                {/* <button type="button"  className="btn btn-info listinfo font-weight-bold w-25 btn-lg " onClick={this.toggleSuccess} >
-                                                <i className="fa fa-plus-square pr-3 "></i> <span >Ajouter</span></button> */}
-                                                {/* </Link>  */}
+                                            <Link to={`/medecin/remarque`} > 
+                                             <button type="button"  className="btn btn-info listinfo font-weight-bold w-25 btn-lg " onClick={this.toggleSuccess} >
+                                                <i className="fa fa-plus-square pr-3 "></i> <span >Ajouter</span></button> 
+                                             </Link>   
                                                 
 
                                             </table>

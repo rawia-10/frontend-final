@@ -3,7 +3,7 @@
 
 
 import dotenv from  'dotenv'
-import React, { Component } from 'react';
+import React, { Component, } from 'react';
 import { Button, Card, CardBody, CardFooter,CardGroup, Col, Container, Form, Input, InputGroup, InputGroupAddon, InputGroupText, Row } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import image from '../logo.png';
@@ -11,61 +11,125 @@ import { ToastsContainer, ToastsStore } from 'react-toasts';
 import axios from 'axios';
 import JwtDecode from 'jwt-decode';
 
-class LoginS extends Component {
-
+class LoginP extends Component {
   constructor(props) {
     super(props);
-
+  
     this.state = {
       collapse: true,
       fadeIn: true,
       timeout: 300,
-
       email:"",
-
-      password:""
+      password:"",
+      erreur:false,
+      EmailErr: "",
+      PasswordErr: "",
+  
+  
     };
-
+  
     dotenv.config()
-
+  
   }
+  
+  
+ 
+  Login=()=> {
 
-
-
-
-Login=()=> {
-  axios.post("http://localhost:5000/secretaire/login", {
-    email:this.state.email,
-    password:this.state.password
-  })
-    .then(res => {
-    
+    axios.post('http://localhost:5000/patient/login', {
+      email: this.state.email,
+      password: this.state.password
+    })
+    .then((res) => {
+      
+      
       if (res.data['status'] === "error") {
         alert(" verifier votre login ou password")
       }
       else {
-
-
+  
+  
          console.log(res.data.data.token);
          console.log(res.data.data.user._id);
          //console.log(JSON.parse(JSON.stringify(JSON.parse(JSON.stringify(res)).data)).user);
-
-
-
-            if (res.data.data.user.__t == 'secretaire' ) {
+            if (res.data.data.user.__t=== 'patient' ) {
               localStorage.setItem('role', res.data.data.user.__t);
               localStorage.setItem('id', res.data.data.user._id);
-              this.props.history.push('/home/listepatient'); //redirection mrigla zeda
+              this.props.history.push(`/rdv`); //redirection mrigla zeda
             }
       }
+      
+      
+    }
+      )
+ 
 
+ }
+  
+  validate = () => {
+  
+  let isError = false;
+  
+  const errors = {
+    EmailErr: "",
+    PasswordErr: "",
+  }
+  
+  console.log("login ",this.state.email);
+  console.log("pws ",this.state.password);
+  
+  
+  
+  const regex1=/^[a-zA-Z0-9._-]+$/;
+  
+  
+  if ((this.state.email==="")||(this.state.Emaemailil.length > 30)||!regex1.test(this.state.email)) {
+  
+    isError = true;
+    errors.EmailErr = "Veuillez verifier votre Email";
+  }
+  
+  
+  if ((this.state.password==="")||(this.state.password.length > 20)) {
+  
+    isError = true;
+    errors.PasswordErr = "veuillez verifier votre mot de passe";
+  }
+  
+  
+  
+  if (isError) {
+    this.setState({
+      ...this.state,
+      ...errors
     })
-}
+  }
+  
+  console.log("errrr ", isError)
+  
+  
+  this.setState({
+    erreur:isError
+  })
+  
+  return isError;
+  }
+ 
 
+  handleChange = (e) => {
 
+		if (e.target.name === 'email') {
+			this.setState({ email: e.target.value });
+		}
 
+		if (e.target.name === 'password') {
+			this.setState({ password: e.target.value });
+		}
+	};
 
   render() {
+    const { item } = this.props
+
     return (
 
 
@@ -112,31 +176,41 @@ Login=()=> {
 
 
 
-    {/* Sing in  Form */}
+        {/* Sing in  Form */}
         <section className="banner-areaa">
           <div className="containere">
             <div className="signin-content ">
               <div className="signin-image col-lg-5">
-                <figure><img src="images/signin-image.jpg" alt="sing up image" /></figure>
+                <figure><img src="images/signin-imagep.jpg" alt="sing up image" /></figure>
 
               </div>
               <div className="col-lg-4">
               <Form className="f">
               <h1 className="text" >S'identifier</h1>
               <p className="text">Connectez-vous à votre compte</p>
-
               <InputGroup className="mb-3">
                 <InputGroupAddon addonType="prepend">
                   <InputGroupText>
                     <i className="icon-user"></i>
                   </InputGroupText>
                 </InputGroupAddon>
-                <Input type="text" name="email"
-                 placeholder="E-mail" autoComplete="off"
-                value={this.state.email}
-                onChange={event => this.setState({email: event.target.value})} />
+                <Input type="text" name="email" onChange={this.handleChange} placeholder="E-mail" autoComplete="off"
+                value={this.state.email} />
               </InputGroup>
+              {
 
+                this.state.erreur===false ?
+
+                    <p >{this.state.emailERR}</p>:null
+
+            }
+            {
+
+                this.state.erreur===true ?
+
+                    <p style ={{color:"red", fontSize:'13px'}}>{this.state.emailERR}</p>:null
+
+            }
 
 
               <InputGroup className="mb-4">
@@ -145,24 +219,34 @@ Login=()=> {
                     <i className="icon-lock"></i>
                   </InputGroupText>
                 </InputGroupAddon>
-                <Input type="password" name="password"  placeholder="mot de passe"
-                autoComplete="current-password" value={this.state.password}
-                onChange={event => this.setState({password: event.target.value})}/>
+                <Input type="password" name="password" onChange={this.handleChange} placeholder="mot de passe"
+                autoComplete="current-password" value={this.state.password} />
               </InputGroup>
 
+              {
 
+                this.state.erreur===false ?
+
+                    <p >{this.state.passwordERR}</p>:null
+
+            }
+            {
+
+                this.state.erreur===true ?
+
+                    <p style ={{color:"red", fontSize:'13px'}}>{this.state.passwordERR}</p>:null
+
+            }
               <Row>
-                <Col xs="6">
-                  <Button color="info" className="s px-5 " onClick={this.Login}  >
+                <Col xs="8">
+                <Button color="info" className="s px-5 " onClick={this.Login}  >
                   <span>Connexion</span></Button>
                 </Col>
               
-
                 </Row>
                 <br></br>
-                <a href="" className=" s px-1"><span>mot de passe oublié</span></a>
-
-                <Link to="register" className="fr">
+                <Link to="/reset" className=" s px-1"><span>mot de passe oublié </span></Link>
+                <Link to="registerP" className="fr">
                 <span className="d-flex align-item-center justify-content-center p-4 notreg "> Créer un compte</span>
 
                 </Link>
@@ -179,12 +263,10 @@ Login=()=> {
          </div>
           </div>
         </section>
-
-        
-
-
- {/* footer */}
- <footer className="hotline-area text-center section-padding">
+      
+     
+  {/* footer */}
+  <footer className="hotline-area text-center section-padding">
       <div className="container">
       <div className="row">
      
@@ -219,11 +301,18 @@ Login=()=> {
 
 
 
-      </div>
+
+        </div>
+
+
+
+
+    
     );
   }
 }
 
-export default LoginS;
+export default LoginP;
+
 
 

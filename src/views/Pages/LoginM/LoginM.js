@@ -39,7 +39,7 @@ class LoginM extends Component {
       password: this.state.password
     })
       .then(res => {
-
+        console.log(res.data.data.user.__t);
         if (res.data['status'] === "error") {
           alert(" verifier votre login ou password")
         }
@@ -52,8 +52,8 @@ class LoginM extends Component {
 
 
 
-							if (res.data.data.user.role.nom=== 'medecin' ) {
-                localStorage.setItem('role', res.data.data.user.role.nom);
+							if (res.data.data.user.__t === 'medecin' ) {
+                localStorage.setItem('role', res.data.data.user.__t);
 								this.props.history.push('/home/listepatients');
 							}
         }

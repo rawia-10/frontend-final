@@ -88,7 +88,7 @@ class Forms extends Component {
   // this.state.prenom, this.state.email, this.state.password
   // , this.state.image, this.state.address, this.state.genre, this.state.date_naissance
   // , this.state.tel, this.state.fix, this.state, this.state.assurance_maladie, this.state.specialite
-  console.log("state",this.state.address);
+  console.log("state",this.state.address,this.state.tel,this.state.fix,this.state.assurance_maladie);
   await axios.post("http://localhost:5000/medecin/addmedecin",formdata)
     .then (res=> {
       console.log ("data",res.data);
@@ -174,7 +174,7 @@ this.setState({file:file})
               
                   <FormGroup row>
                     <Col >
-                      <Label htmlFor="text-input">Nom</Label>
+                      <Label htmlFor="text-input">nom</Label>
                     </Col>
                     <Col xs="6" md="9">
                       <Input
@@ -212,7 +212,7 @@ this.setState({file:file})
                   <FormGroup row>
                 
                 <Col >
-                    <Label htmlFor="text-input">assurance maladie</Label>
+                    <Label htmlFor="text-input">spécialité</Label>
                   </Col>
                   <Col xs="6" md="9">
 
@@ -240,7 +240,7 @@ this.setState({file:file})
                       <Input
                         value={this.state.password} 
                         onChange={evt=>this.setState({password:evt.target.value})}
-                      type="password" id="text-input4" nom="text-input" placeholder="password" />
+                      type="password" id="text-input4" nom="text-input" placeholder="mot de passe" />
                 
                     </Col>
                   </FormGroup>
@@ -286,7 +286,7 @@ this.setState({file:file})
                     </Col>
                   </FormGroup>
 
-                          <FormGroup row>
+                   <FormGroup row>
                     <Col >
                       <Label htmlFor="textarea-input">Fix</Label>
                     </Col>
@@ -353,7 +353,7 @@ this.setState({file:file})
 
                   <FormGroup row>
                     <Col >
-                      <Label htmlFor="file-input">Image</Label>
+                      <Label htmlFor="file-input">Photo</Label>
                     </Col>
                     <Col xs="6" md="9">
                       <Input type="file" 
@@ -389,8 +389,8 @@ this.setState({file:file})
               <br></br>
                 <Button 
                  onClick={this.handelSubmit.bind(this)}
-                type="submit" size="sm" color="primary"><i classnom="fa fa-dot-circle-o"></i> Submit</Button>
-                <Button type="reset" size="sm" color="danger"><i classnom="fa fa-ban"></i> Reset</Button>
+                type="submit" size="sm" color="primary"><i classnom="fa fa-dot-circle-o"></i> Envoyer</Button>
+                <Button type="reset" size="sm" color="danger"><i classnom="fa fa-ban"></i> Annuler</Button>
           
          
        </div>

@@ -13,8 +13,8 @@ import Medecininfo from './medecin';
 import Info from './Info.js';
 import Newpwd from './Newpwd';
 import Rdv from './Rdv'
-
+import Compte from './Compte/Compte'
 
 export {
-  Login, Page404, LoginAdmin, Register,LoginS,LoginM,LoginP,RegisterM,RegisterP,Patient,Medecin,Info,Medecininfo,Newpwd,Rdv
+  Login, Compte,Page404, LoginAdmin, Register,LoginS,LoginM,LoginP,RegisterM,RegisterP,Patient,Medecin,Info,Medecininfo,Newpwd,Rdv
 };

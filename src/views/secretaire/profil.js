@@ -1,131 +1,279 @@
-import React, { Component } from 'react';
-import { Card, CardBody, Col, Row } from 'reactstrap';
-import axios from 'axios'
-import Moment from 'react-moment';
-import { Link } from 'react-router-dom'
 
 
+ import React, { Component } from 'react';
 
-class secretaireInfobyS extends Component {
-    constructor(props) {
-        super(props);
+ import {
+   Badge,
+   Button,
+   Card,
+   CardBody,
+   CardFooter,
+   CardHeader,
+   Col,
+   Collapse,
+   DropdownItem,
+   DropdownMenu,
+   DropdownToggle,
+   Fade,
+   Form,
+   FormGroup,
+   FormText,
+   FormFeedback,
+   Input,
+   InputGroup,
+   InputGroupAddon,
+   InputGroupButtonDropdown,
+   InputGroupText,
+   Label,
+   Row,
+ } from 'reactstrap';
+ import axios from 'axios';
+ 
+ class Forms extends Component {
+ 
+   constructor(props) {
+     super(props);
+ 
+     this.toggle = this.toggle.bind(this);
+     this.toggleFade = this.toggleFade.bind(this);
+     this.state = {
+       collapse: true,
+       fadeIn: true,
+       timeout: 300,
+       Id: this.props.match.params.id,
+       secretaire:{
+        nom: "",
+        prenom: "",
+        address: "",
+        email: "",
+        tel: "",
+        date_naissance:"",
+        genre:""
+       },
+       nom: "",
+       prenom: "",
+       address: "",
+       email: "",
+       tel: "",
+       date_naissance:"",
+       genre:"",
+   } }
+ 
+   toggle() {
+     this.setState({ collapse: !this.state.collapse });
+   }
+ 
+   toggleFade() {
+     this.setState((prevState) => { return { fadeIn: !prevState }});
+   }
 
-        this.state = {
-            collapse: true,
-            fadeIn: true,
-            timeout: 300,
-            Id: this.props.match.params.Id,
-            nom:"",
-            prenom:"",
-            address:"",
-            genre:"",
-            date_naissance:"",
-            email:"",
-            tel:"",
-           
-            password:"",
-          
-            CreatedAt: "",
-            UpdatedAt: ""
-        };
-    }
+
 
  
-   
-getSecretaire(){
-    fetch(`http://localhost:5000/secretaire/getbyid/${this.props.match.params.id}`,
-    {method:"GET"})
-      .then(response => response.json()) 
-      .then(data => {
-        console.log("GETONE", data);
-   
+ 
+ 
+   reset()
+   {
+       this.setState({nom:""})
+   }
+ 
+ 
+ 
+ onChange= (event) => {
+     this.setState({nom: event.target.value});
+     this.setState({prenom: event.target.value});
+     this.setState({email: event.target.value});
+     this.setState({genre: event.target.value});
+     this.setState({tel: event.target.value});
+     this.setState({date_naissance: event.target.value});
+     this.setState({address: event.target.value});
+   }
+ 
+  
+
+ componentDidMount(){
+ this.getOne();
+ }
+ 
+ getOne(){
+     fetch("http://localhost:5000/secretaire/getbyid/"+localStorage.getItem ("id"),
+     {method:"GET"})
+       .then(response => response.json())
+       .then(data => {
+         console.log("GETONE", data);
+         this.setState({secretaire:data})    })
+   }
+ 
+   handelSubmit() {   
+    // console.log("state", this.state.nom,this.state.prenom ,this.state.email
+    // ,this.state.genre ,this.state.address,this.state.tel,this.state.date_naissance);
+    if (this.state.nom === "") {
+      this.state.nom= this.state.secretaire.nom
+      }
+       if (this.state.prenom === "") {
+      this.state.prenom= this.state.secretaire.prenom
+      }
+      if (this.state.email === "") {
+        this.state.email= this.state.secretaire.email
+        }
+         if (this.state.genre === "") {
+        this.state.genre= this.state.secretaire.genre
+        }
         
-        this.setState(data)           
-    })
-  }
+        if (this.state.address === "") {
+          this.state.address= this.state.secretaire.address
+          }
+           if (this.state.tel === "") {
+          this.state.tel= this.state.secretaire.tel
+          }
+          if (this.state.date_naissance === "") {
+            this.state.date_naissance= this.state.secretaire.date_naissance
+            }
+             
+            
+        
+     axios.put("http://localhost:5000/secretaire/update/" + localStorage.getItem("id"),
+       {
+        nom:this.state.nom,
+        prenom:this.state.prenom,
+        genre:this.state.genre,
+        address:this.state.address,
+        email:this.state.email,
+        password:this.state.password,
+        tel:this.state.tel,
+        date_naissance:this.state.date_naissance
+
+         
+       })
+       .then(res => {
+         console.log("data", res.data);
+         window.location.href = "/#/secretaire/infos/:id"
+       })  }
+  
 
 
-componentDidMount = () => {
-  this.getSecretaire();
-}
 
-    render() {
-        return (
-            <section>
-                <div className='contact-list-container'>
 
-                    <div className="animated fadeIn">
-                        <Row>
-                            <Col xs="12" sm="12" md="12">
-                                <Card>
-                                    <CardBody>
-                                        <h1 className="h1 text-center text-success font-weight-bold">secretaire Info</h1>
-                                        <hr></hr>
-                                        <div className="table-responsive">
-                                            <table className="table">
-                                                <tbody>
-                                                    <tr>
-                                                        <td className="font-weight-bold">Nom</td>
-                                                        <td>{this.state.nom}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td className="font-weight-bold">prenom</td>
-                                                        <td>{this.state.prenom}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td className="font-weight-bold">Address</td>
-                                                        <td>{this.state.address}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td className="font-weight-bold">Email</td>
-                                                        <td>{this.state.email}</td>
-                                                    </tr>
-                                                    <tr>
-                                                    <td className="font-weight-bold">Telephone</td>
-                                                    <td>{this.state.tel}</td>
-                                                </tr>
-                                                    <tr>
-                                                        <td className="font-weight-bold">genre</td>
-                                                        <td>{this.state.genre}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td className="font-weight-bold">date naissance</td>
-                                                        <td>{this.state.date_naissance}</td>
-                                                    </tr>
 
-                                                  
-                                                    <tr>
-                                                        <td className="font-weight-bold">Created at</td>
-                                                        <td>
-                                                            <Moment format="DD-MM-YYYY">{this.state.createdAt}</Moment>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td className="font-weight-bold">Updated at</td>
-                                                        <td>
-                                                            <Moment format="DD-MM-YYYY">{this.state.updatedAt}</Moment>
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-                                                <Link   to='/home/listesecretaire'>
-                                                    <div className=" d-flex justify-content-start pl-5 ">
-                                                        <button type="button" name="" id="" className="btn btn-danger listinfo font-weight-bold w-25 btn-lg ">
-                                                            <i className="fa fa-refresh pr-3 "></i> <span >List</span></button>
-                                                    </div>
-                                                </Link>
-                                            </table>
+ render() {
+     return (
+       <div classnom="animated fadeIn">
+         <Row>
+          <Col xs="12" md="12">
+            <Card>
+              <CardHeader>
+                <strong>Modifier secretaire</strong>
+              </CardHeader>
+              <CardBody>
+                <Form action="" method="post" encType="multipart/form-data" className="form-horizontal">
 
-                                        </div>
-                                    </CardBody>
-                                </Card>
-                            </Col>
-                        </Row>
-                    </div>
-                </div>
+                  <FormGroup row>
+                     <Col md="3">
+                      <Label htmlFor="text-input">nom</Label>
+                    </Col> 
+                    <Col xs="12" md="9">
+                      <Input   defaultValue={this.state.secretaire.nom}
+                     onChange={event => this.setState({nom: event.target.value})}
+                       type="text" id="text-input" name="text-input"/>
+  
+                    </Col>
+                  </FormGroup>
 
-            </section>
+                  <FormGroup row>
+                    <Col md="3">
+                      <Label htmlFor="text-input">prénom</Label>
+                    </Col>
+                    <Col xs="12" md="9">
+                      <Input   defaultValue={this.state.secretaire.prenom}
+                      onChange={event => this.setState({prenom: event.target.value})}
+                       type="text" id="text-input" name="text-input"/>
 
-        );
-    }
-}
-export default secretaireInfobyS;
+                    </Col>
+                  </FormGroup>
+
+
+                  <FormGroup row>
+                    <Col md="3">
+                      <Label htmlFor="text-input">adresse</Label>
+                    </Col>
+                    <Col xs="12" md="9">
+                      <Input   defaultValue={this.state.secretaire.address}
+                        onChange={event => this.setState({address: event.target.value})}
+                       type="text" id="text-input" name="text-input"/>
+
+                    </Col>
+                  </FormGroup>
+
+                  <FormGroup row>
+                    <Col md="3">
+                      <Label htmlFor="email-input">Email </Label>
+                    </Col>
+                    <Col xs="12" md="9">
+                      <Input   defaultValue={this.state.secretaire.email}
+                        onChange={event => this.setState({email: event.target.value})}
+                       type="email" id="email-input" name="email-input"  autoComplete="email"/>
+
+                    </Col>
+                  </FormGroup>
+
+
+
+                  <FormGroup row>
+                    <Col md="3">
+                      <Label htmlFor="date-input">date naissance </Label>
+                    </Col>
+                    <Col xs="12" md="9">
+                      <Input defaultValue={this.state.secretaire.date_naissance}
+                    onChange={event => this.setState({date_naissance: event.target.value})}
+                       type="date" id="date-input" name="date-input"  />
+                    </Col>
+                  </FormGroup>
+              
+
+              <FormGroup row>
+                    <Col md="3">
+                      <Label htmlFor="tel-input">Téléphone</Label>
+                    </Col>
+                    <Col xs="12" md="9">
+                      <Input defaultValue={this.state.secretaire.tel}
+                       onChange={event => this.setState({tel: event.target.value})}
+                      type="number" id="tel" name="tel" autoComplete="tel" />
+
+                    </Col>
+                  </FormGroup>
+
+
+                  <FormGroup row>
+                    <Col md="3">
+                      <Label>Genre</Label>
+                    </Col>
+                    <Col md="9">
+                    <select className="select-css" name="select" id="select" required placeholder="Genre"  defaultValue={this.state.secretaire.genre}
+                   onChange={event => this.setState({genre: event.target.value})}>
+                    <option value={"0"}> Choisir votre genre </option>
+                            <option value="Femme"> Femme</option>
+                             <option value="Homme">  Homme </option>        
+                   </select>
+
+                    </Col>
+                  </FormGroup>
+
+</Form>
+              </CardBody>
+              <CardFooter>
+                <Button onClick={this.handelSubmit.bind(this)} type="submit" size="sm" color="primary"><i className="fa fa-dot-circle-o"></i> Envoyer</Button>
+                <Button  onClick={this.reset} type="reset" size="sm" color="danger"><i className="fa fa-ban"></i> Annuler</Button>
+              </CardFooter>
+            </Card>
+
+          </Col>
+
+        </Row>
+
+       </div>
+     );
+   }
+ }
+ 
+ export default Forms;
+ 

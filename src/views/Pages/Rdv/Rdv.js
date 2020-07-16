@@ -43,36 +43,64 @@ class Forms extends Component {
       timeout: 300,
       date:"",
       heure:"",
-      email:"",
-      tel:"",
-      nom:"",
-      prenom:"",
-    
+      patient:{
+        email:"",
+        tel:"",
+        nom:"",
+        prenom:"",
+        id:"",
+      }
+     
+      
+
     };
   }
 
   toggle() {
-    this.setState({ collapse: !this.state.collapse });
+    
+    this.setState({ collapse: !this.state.collapse,_id: localStorage.getItem("id")  });
+    
+
   }
 
   toggleFade() {
     this.setState((prevState) => { return { fadeIn: !prevState }});
   }
+
+  getPatient(){
+    let id = localStorage.getItem('id')
+    fetch(`http://localhost:5000/patient/getbyid/`+id,
+    {method:"GET"})
+      .then(response => response.json()) 
+      .then(data => {
+        console.log("GETONE", data);
+   
+        
+        this.setState(data)           
+    })
+  }
+
+
+componentDidMount = () => {
+  this.getPatient();
+}
   handelSubmit()
   {
       console.log("state",this.state.date, this.state.heure,this.state.tel,this.state.email,this.state.nom,this.state.prenom)
+     
       axios.post("http://localhost:5000/rdv/addrdv",{
       date:this.state.date,
       heure:this.state.heure,
       tel:this.state.tel,
       email:this.state.email,
-      nom:this.state.nom,
-      prenom:this.state.prenom,
-     
+       nom:this.state.nom,
+       prenom:this.state.prenom,
+      
       })
 .then(res=>{
     console.log("data",res.data);
-    window.location.href="/#/home/listerendezvous"
+    alert("rendez-vous ajoutez avec succes")
+    // window.location.href="/#/home/listerendezvous"
 })
 
   }
@@ -88,10 +116,7 @@ class Forms extends Component {
 onChange= (event) => {
     this.setState({date: event.target.value});
     this.setState({heure: event.target.value});
-    this.setState({tel: event.target.value});
-    this.setState({email: event.target.value});
-    this.setState({nom: event.target.value});
-    this.setState({prenom: event.target.value});
+    
    
   }
 
@@ -143,7 +168,7 @@ onChange= (event) => {
       <div className="signup-form">
     <br></br>
       <Form method="" className="f" >
-                
+{/*                 
              <InputGroup className="mb-3">
                   <InputGroupAddon addonType="prepend">
                   <InputGroupText>
@@ -163,7 +188,7 @@ onChange= (event) => {
                     <Input defaultValue={this.state.prenom} required
                       onChange={evenement=>this.setState({prenom:evenement.target.value})} type="text" name="nom" id="nom" placeholder="prénom" />
                   </InputGroup> 
-          
+           */}
                   <InputGroup className="mb-3">
                   <InputGroupAddon addonType="prepend">
                   <InputGroupText>
@@ -196,9 +221,36 @@ onChange= (event) => {
                    </select>
 
                   </InputGroup>
+                  <table className="table">
+                                                <tbody>
+                                                    <tr>
+                                                        <td className="font-weight-bold">Nom</td>
+                                                        <td>{this.state.nom}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td className="font-weight-bold">prenom</td>
+                                                        <td>{this.state.prenom}</td>
+                                                    </tr>
+                                                  
+                                                    <tr>
+                                                        <td className="font-weight-bold">Email</td>
+                                                        <td>{this.state.email}</td>
+                                                    </tr>
+                                                    <tr>
+                                                    <td className="font-weight-bold">Telephone</td>
+                                                    <td>{this.state.tel}</td>
+                                                </tr>
+                                                    
+
+                                                  
+                                                  
+                                                </tbody>
+                                                
+
+                                            </table>
 
        
-                
+{/*                 
                   <InputGroup className="mb-3">
                   <InputGroupAddon addonType="prepend">
                   <InputGroupText>
@@ -217,10 +269,10 @@ onChange= (event) => {
                 </InputGroupAddon>
                     <Input defaultValue={this.state.email} required
                       onChange={evenement=>this.setState({email:evenement.target.value})} type="email" name="email" id="email" placeholder=" Email" />
-                  </InputGroup>
+                  </InputGroup>*/}
 
-                  <Button onClick={this.handelSubmit.bind(this)} type="submit" size="sm" color="primary"><i className="fa fa-dot-circle-o"></i> Envoyer</Button>
-                <Button  onClick={this.reset.bind(this)} type="reset" size="sm" color="danger"><i className="fa fa-ban"></i> Annuler</Button>
+                  <Button onClick={this.handelSubmit.bind(this)} type="submit" size="sm" color="primary"><i className="fa fa-dot-circle-o"></i> Envoyer</Button> 
+          <Link to='/compte'>     <Button   type="reset" size="sm" color="danger"><i className="fa fa-ban"></i> Annuler</Button></Link>
              
 
 </Form>

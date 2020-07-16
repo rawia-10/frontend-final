@@ -61,7 +61,7 @@ class rqpatient extends Component {
       handelSubmit()
       {
         
-          axios.post("http://localhost:5000/portfolio/addportfolio",{
+          axios.post("http://localhost:5000/patient/addpatient",{
             remarque:this.state.remarque,
          
          

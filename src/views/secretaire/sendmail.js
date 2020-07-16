@@ -43,9 +43,9 @@ class Forms extends Component {
         email: "",
         tel: "",
        },
-      to :'',
+       to :'',
       subject : '',
-      text : '',
+      text : ''
     };
     // const [inputs, setInputs] = useState({email: '', name: '', subject: '', description: ''})
   }
@@ -57,15 +57,28 @@ class Forms extends Component {
   toggleFade() {
     this.setState((prevState) => { return { fadeIn: !prevState }});
   }
-
+  componentDidMount(){
+    this.getOne();
+    }
+    
+    getOne(){
+        fetch("http://localhost:5000/rdv/getbyid/"+localStorage.getItem ("idc"),
+        {method:"GET"})
+          .then(response => response.json())
+          .then(data => {
+            console.log("GETONE", data);
+            this.setState({rdv:data})    })
+      }
+    
+     
 
   handelSubmit(){
    
      axios.post("http://localhost:5000/email/send",{
   
-      to : this.state.to ,
-      subject :this.state.subject,
-      text:this.state.text,
+      to : this.state.rdv.email ,
+      subject :'Rendez-vous accepter',
+      text:'votre rdv est a: '+this.state.rdv.heure+'le'+this.state.rdv.date,
         })
         .then(res => {
             console.log("respose", res.data);
@@ -119,12 +132,14 @@ onChange= (event) => {
                     <Col xs="12" md="9">
                       <Input type="email" id="hf-email" name="hf-email" 
                       placeholder="" autoComplete="email"
-                      defaultValue={this.state.to}
-                      onChange={evenement=>this.setState({to:evenement.target.value})} />
+                      defaultValue={this.state.rdv.email}
+                    onChange={event => this.setState({to: event.target.value})}/> 
                     </Col>
 
+
+                  
                   </FormGroup>
-                  <FormGroup row>
+                  {/* <FormGroup row>
                     <Col md="3">
                       <Label htmlFor="hf-password">subject</Label>
                     </Col>
@@ -133,9 +148,9 @@ onChange= (event) => {
                        value={this.state.subject} 
                      onChange={evt => this.setState({subject: evt.target.value})}/>
                     </Col>
-                  </FormGroup>
+                  </FormGroup> */}
 
-
+{/* 
                   <FormGroup row>
                     <Col md="3">
                       <Label htmlFor="textarea-input">Text</Label>
@@ -143,10 +158,11 @@ onChange= (event) => {
                     <Col xs="12" md="9">
                       <Input type="textarea" name="textarea-input" id="textarea-input" rows="9"
                              placeholder="Content..." 
-                             value={this.state.text} 
-                     onChange={evt => this.setState({text: evt.target.value})}/>
+                             defaultValue="votre rdv est accepter '{state.rdv.heure}'"
+                    //  onChange={evt => this.setState({text: evt.target.value})}
+                    />
                     </Col>
-                  </FormGroup>
+                  </FormGroup> */}
                 </Form>
               </CardBody>
             
