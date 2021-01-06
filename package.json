@@ -26,7 +26,7 @@
     "@material-ui/pickers": "^3.2.10",
     "@progress/kendo-react-dateinputs": "^3.13.0",
     "@progress/kendo-react-intl": "^3.13.0",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "bootstrap": "^4.5.0",
     "chart.js": "^2.8.0",
     "classnames": "^2.2.6",
