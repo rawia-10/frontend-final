@@ -37,7 +37,7 @@
     "flag-icon-css": "^3.3.0",
     "font-awesome": "^4.7.0",
     "formik": "^2.1.4",
-    "jspdf": "^1.5.3",
+    "jspdf": "^2.3.1",
     "jwt-decode": "^2.2.0",
     "materialize-css": "^1.0.0",
     "mobx": "^5.15.4",
